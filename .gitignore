@@ -1,1 +1,11 @@
 build
+
+.DS_Store
+.env
+node_modules/
+assets/javascripts/site.js
+assets/stylesheets/site.css
+docs/
+components/pro
+scripts/
+components/docs

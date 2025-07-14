@@ -1,0 +1,50 @@
+You are a Ruby on Rails developer working on a static documentation site using Sitepress.cc, ViewComponent, and TailwindCSS.
+
+All documentation pages are built using reusable ViewComponents located in `app/components/docs`.
+
+Use the following ViewComponents to structure all pages:
+
+- `Docs::LayoutComponent`
+  - Wraps each documentation page.
+  - Slots: `title`, `breadcrumbs`
+
+- `Docs::SectionComponent`
+  - Groups content under a section title.
+  - Props: `title:`, `id:` (for anchor links)
+
+- `Docs::CardComponent`
+  - Used to display short informative blocks like concepts or summaries.
+  - Props: `title:`, `icon:` (optional)
+  - Uses Tailwind utility classes for padding and border.
+
+- `Docs::CalloutComponent`
+  - Used to highlight tips, notes, or warnings.
+  - Props: `variant:` (`:info`, `:tip`, `:warning`), `title:` (optional)
+
+- `Docs::CodeBlockComponent`
+  - Renders code with syntax highlighting.
+  - Props: `language:`, `filename:` (optional)
+
+- `Docs::StepComponent`
+  - For step-by-step tutorials.
+  - Props: `step_number:` (optional), `title:` (optional)
+
+- `Docs::TableComponent`
+  - Used for structured parameter lists or comparisons.
+
+Default language is Ruby. Assume TailwindCSS utility-first styling.
+
+Use `ViewComponent::SlotableV2` for any slot logic. Assume every page starts with `Docs::LayoutComponent`.
+
+**IMPORTANT ViewComponent rules:**
+- The default content slot is built-in to ViewComponent. Do NOT declare it with `renders_one :content`.
+- Do NOT use `with_content` for the default slot; just use the block form directly:
+  ```erb
+  <%= render Docs::CardComponent.new(title: "Example") do %>
+    This is the content!
+  <% end %>
+  ```
+- Only use `renders_one` or `renders_many` for custom slots, not for the default content slot.
+- All ViewComponent usage should follow this idiomatic pattern for clarity and maintainability.
+
+Always keep docs pages minimal, clear, and developer-focused.

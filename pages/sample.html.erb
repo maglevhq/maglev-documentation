@@ -1,0 +1,70 @@
+<%= render Docs::LayoutComponent.new do |layout| %>
+  <% layout.with_title do %>
+    Sample Page
+  <% end %>
+  <% layout.with_breadcrumbs do %>
+    <ol class="flex items-center space-x-2 text-sm text-gray-500">
+      <li><a href="/" class="hover:text-gray-700">Home</a></li>
+      <li>/</li>
+      <li class="text-gray-900">Sample</li>
+    </ol>
+  <% end %>
+  
+  <%= render Docs::SectionComponent.new(title: "Introduction") do %>
+    <p>This is a sample documentation page to demonstrate the use of custom ViewComponents in Sitepress.</p>
+  <% end %>
+
+  <%= render Docs::SectionComponent.new(title: "Feature Overview") do %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+      <%= render Docs::CardComponent.new(title: "Fast Setup", icon: "fas fa-bolt") do %>
+        <p>Get started in seconds with our streamlined setup process.</p>
+      <% end %>
+      <%= render Docs::CardComponent.new(title: "Customizable", icon: "fas fa-cogs") do %>
+        <p>Tailor the documentation site to your needs using flexible components.</p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= render Docs::SectionComponent.new(title: "Usage Example") do %>
+    <%= render Docs::CalloutComponent.new(variant: :info, title: "Tip") do %>
+      You can use any Ruby code inside your documentation pages!
+    <% end %>
+    <%= render Docs::CodeBlockComponent.new(language: "ruby", filename: "hello.rb") do %>
+puts 'Hello, world!'
+    <% end %>
+  <% end %>
+
+  <%= render Docs::SectionComponent.new(title: "Step-by-Step Guide") do %>
+    <%= render Docs::StepComponent.new(step_number: 1, title: "Install dependencies") do %>
+      <%= render Docs::CodeBlockComponent.new(language: "bash") do %>
+bundle install
+      <% end %>
+    <% end %>
+    <%= render Docs::StepComponent.new(step_number: 2, title: "Start the server") do %>
+      <%= render Docs::CodeBlockComponent.new(language: "bash") do %>
+sitepress server
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= render Docs::SectionComponent.new(title: "Component Comparison") do %>
+    <%= render Docs::TableComponent.new(title: "Component Features") do |table| %>
+      <% table.with_header do %>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Component</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purpose</th>
+      <% end %>
+      <% table.with_row do %>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Card</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Highlight key concepts</td>
+      <% end %>
+      <% table.with_row do %>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Callout</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Draw attention to tips or warnings</td>
+      <% end %>
+      <% table.with_row do %>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Step</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Guide users through a process</td>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %> 

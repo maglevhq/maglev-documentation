@@ -8,10 +8,13 @@ gem "webrick"
 
 # Templating engines. Under the hood Sitepress uses a slimmed
 # down Rails, so rails templating engines should mostly work.
-gem "haml-rails"
-gem "slim-rails"
-gem "sass-rails"
 gem "markdown-rails", "~> 1.0"
+
+# A pure Ruby code highlighter that is compatible with Pygments
+gem 'rouge'
+
+# A Ruby gem to load environment variables from `.env`.
+gem 'dotenv'
 
 # View component libraries.
 gem "view_component"

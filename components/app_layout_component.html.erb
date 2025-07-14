@@ -1,0 +1,17 @@
+<div class="bg-white dark:bg-zinc-900">
+  <%= render AppLayout::TopbarComponent.new do |topbar| %>
+    <% topbar.with_links do %>
+      <% topbar_links.each do |link| %>
+        <%= link %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div class="px-6 lg:px-8">
+    <div class="mx-auto max-w-xl lg:max-w-7xl">
+      <div class="mx-auto flex max-w-xl items-start gap-x-12 lg:max-w-7xl">
+        <%= render AppLayout::SidebarComponent.new(site: site, current_page: current_page) %>
+        <%= content %>
+      </div>
+    </div>
+  </div>
+</div>
