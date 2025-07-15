@@ -4,16 +4,20 @@ x build the navbar based on the pages
 x generate the page nav
   x list all the #h2 / #h3 (nokogiri)
   x anchors
-- page description
+x page description
+x write a script to import all the pages from gitbook
+- generate a markdown file for the whole site (to be consumed by a local AI)
 - favicon
 - handle: redirect_to
+- next/previous page
+- sticky folder name in the navbar
 - markdown
   - implement liquid tags
     x hint
+    x table
     - tabs
     - code
       - copy to the clipboard
-- write a script to import all the pages from gitbook
-
-? next/previous page
+- github action to deploy the code
+- basic search engine
 ? run AI to fix English sentences

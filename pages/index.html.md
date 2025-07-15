@@ -1,10 +1,11 @@
 ---
 title: Introduction
-order: 0
+order: 1
 ---
+
 # Introduction
 
-Maglev is a page builder like Elementor or Divi but that you can plug in any Ruby on Rails application.&#x20;
+Maglev is a page builder like Elementor or Divi but that you can plug in any Ruby on Rails application. 
 
 It's composed of 2 major features:
 

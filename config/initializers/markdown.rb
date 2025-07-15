@@ -38,7 +38,7 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   # about at https://github.com/vmg/redcarpet#and-its-like-really-simple-to-use
   # Make sure you know what you're doing if you're using this to render user inputs.
   def enable
-    [:fenced_code_blocks]
+    [:fenced_code_blocks, :tables, :hard_wrap]
   end
 
   def block_code(code, language)
@@ -54,7 +54,7 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
 
     id = text.parameterize
     <<-HTML
-      <h#{header_level} id="#{id}" class="scroll-mt-16">
+      <h#{header_level} id="#{id}" class="scroll-mt-20">
         #{text}
       </h#{header_level}>
     HTML
@@ -63,6 +63,14 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   def preprocess(full_document)
     liquid_template = Liquid::Template.parse(full_document, environment: liquid_environment, error_mode: :lax)
     liquid_template.render({}, registers: { markdown_renderer: self.renderer })
+  end
+
+  def postprocess(full_document)
+    full_document.gsub("\\<br>", "<br>")
+  end
+
+  def renderer
+    ::Redcarpet::Markdown.new(self.class.new(**features), **features)
   end
 
   private

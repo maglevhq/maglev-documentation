@@ -14,7 +14,7 @@ class Liquid::Tags::HintTag < Liquid::Block
     <div class="border-l-4 p-4 #{wrapper_css_class}">
       <div class="flex">
         <div class="shrink-0 -translate-y-0.5">#{icon_html}</div>
-        <div class="ml-3 text-sm #{text_css_class} dark:text-white prose-p:my-0">#{render_markdown(super, context)}</div>
+        <div class="ml-3 text-sm #{text_css_class} dark:text-white prose-p:my-0">#{render_markdown(clean_content(super), context)}</div>
       </div>
     </div>
     HTML
@@ -48,14 +48,10 @@ class Liquid::Tags::HintTag < Liquid::Block
   end
 
   def text_css_class
-    # case style
-    # when 'info'
-    #   'text-yellow-700'
-    # when 'warning'
-    #   'text-red-700'
-    # when 'success'
-    #   'text-green-700'
-    # end
     "text-zinc-900 dark:text-white"
+  end
+
+  def clean_content(content)
+    content.gsub("\\\n", "<br/>")
   end
 end

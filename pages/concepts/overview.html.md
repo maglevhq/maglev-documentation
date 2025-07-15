@@ -1,13 +1,15 @@
 ---
 title: Overview
+order: 1
 ---
+
 # Overview
 
 ## Lego bricks
 
-Based on our experience of crafting sites for various clients, we came to the conclusion that most of the time a site is composed of various marketing or content oriented bricks stacked in a vertical up-down direction.&#x20;
+Based on our experience of crafting sites for various clients, we came to the conclusion that most of the time a site is composed of various marketing or content oriented bricks stacked in a vertical up-down direction. 
 
-We can say for sure it's definitively not just a trend in the web design world simply because it's the best way possible to read easily the content of a site.&#x20;
+We can say for sure it's definitively not just a trend in the web design world simply because it's the best way possible to read easily the content of a site. 
 
 {% hint style="info" %}
 In Maglev, we named **sections** those "Lego" bricks.
@@ -27,13 +29,13 @@ TODO
 
 We've been building CMS UI for almost 10 years now so we've got a pretty accurate vision of how content editors use a CMS to edit the content of their site.
 
-So we  put a lot of efforts to build a pixel perfect editor as good as what the leaders of the CMS market provides.&#x20;
+So we  put a lot of efforts to build a pixel perfect editor as good as what the leaders of the CMS market provides. 
 
 TODO: screenshot of the editor. GIF maybe?
 
 ## A toolset for developers
 
-We're passionated developers and we know that both a great documentation and the tooling are what developers expect those days.&#x20;
+We're passionated developers and we know that both a great documentation and the tooling are what developers expect those days. 
 
 This is why we've developed:
 

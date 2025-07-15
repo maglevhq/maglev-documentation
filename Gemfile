@@ -27,3 +27,5 @@ gem "rspec", "~> 3.13"
 gem "nokogiri", "~> 1.18"
 
 gem "byebug"
+
+gem "ostruct"
