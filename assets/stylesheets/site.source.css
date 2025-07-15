@@ -5,6 +5,9 @@
 @source "../../components/**/*";
 @source "../../layouts/**/*";
 @source "../../pages/**/*";
+@source "../../liquid/**/*";
+
+@plugin "@tailwindcss/typography";
 
 
 @layer base {

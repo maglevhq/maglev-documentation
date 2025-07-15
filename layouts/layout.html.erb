@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="antialiased <%= settings.appearance['theme'] %>">
+<html lang="en" class="antialiased h-full <%= settings.appearance['theme'] %>">
   <head>
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,8 +36,8 @@
 
     <%= javascript_include_tag 'site', defer: true %>
   </head>
-  <body>
-    <%= render AppLayoutComponent.new(site: site, current_page: current_page) do |layout|%>
+  <body class="h-full">
+    <%= render AppLayoutComponent.new(site: site, current_page: current_page) do |layout| %>
       <% layout.with_topbar_link label: 'Website', href: 'https://www.maglev.dev' %>
       <% layout.with_topbar_link href: 'https://github.com/maglevhq/maglev-core' do %>
         <i class="fa-brands fa-github"></i><span class="ml-2">Source Code</span>
