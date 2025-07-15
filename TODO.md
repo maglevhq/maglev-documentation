@@ -6,7 +6,7 @@ x generate the page nav
   x anchors
 x page description
 x write a script to import all the pages from gitbook
-- generate a markdown file for the whole site (to be consumed by a local AI)
+- basic search engine
 - favicon
 - handle: redirect_to
 - next/previous page
@@ -18,6 +18,7 @@ x write a script to import all the pages from gitbook
     - tabs
     - code
       - copy to the clipboard
+- generate a markdown file for the whole site (to be consumed by a local AI)
 - github action to deploy the code
-- basic search engine
+
 ? run AI to fix English sentences

@@ -9,5 +9,5 @@ assets/javascripts/site.js
 assets/stylesheets/site.css
 docs/
 components/pro
-scripts/
+scripts/ai_migrate_gitbook.rb
 components/docs
