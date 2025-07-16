@@ -14,12 +14,12 @@ x markdown
     x code
       x copy to the clipboard
 x fix the mobile version topbar nav
-- basic search engine
-- favicon
 - handle: redirect_to
-- next/previous page
+- favicon
 - sticky folder name in the navbar
 - Plausible (settings.yml)
+- basic search engine
+- next/previous page
 - generate a markdown file for the whole site (to be consumed by a local AI)
 - github action to deploy the code
 
