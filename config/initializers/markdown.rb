@@ -10,6 +10,8 @@ require_relative '../../liquid/liquid'
 Liquid::Environment.default.error_mode = :strict
 
 class ApplicationMarkdown < MarkdownRails::Renderer::Rails
+  attr_reader :tabs_html
+
   # Reformats your boring punctation like " and " into “ and ” so you can look
   # and feel smarter. Read the docs at https://github.com/vmg/redcarpet#also-now-our-pants-are-much-smarter
   include Redcarpet::Render::SmartyPants
@@ -61,12 +63,22 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   end
 
   def preprocess(full_document)
+    reset_tabs_html
     liquid_template = Liquid::Template.parse(full_document, environment: liquid_environment, error_mode: :lax)
-    liquid_template.render({}, registers: { markdown_renderer: self.renderer })
+    liquid_template.render({},
+      registers: {
+        markdown_renderer: self.renderer,
+        tabs_html: tabs_html
+      }
+    )
   end
 
   def postprocess(full_document)
-    full_document.gsub("\\<br>", "<br>")
+    full_document.gsub!("\\<br>", "<br>")
+    tabs_html.each_with_index do |html, index|
+      full_document.gsub!("<!-- tabs##{index} -->", html)
+    end
+    full_document
   end
 
   def renderer
@@ -80,7 +92,13 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
       environment.register_tag('hint', Liquid::Tags::HintTag)
       environment.register_tag('code', Liquid::Tags::CodeTag)
       environment.register_tag('description', Liquid::Tags::DescriptionTag)
+      environment.register_tag('tabs', Liquid::Tags::TabsTag)
+      environment.register_tag('tab', Liquid::Tags::TabTag)
     end
+  end
+
+  def reset_tabs_html
+    @tabs_html = []
   end
 end
 

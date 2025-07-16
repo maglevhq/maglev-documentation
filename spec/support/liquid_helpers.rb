@@ -8,11 +8,13 @@ module LiquidHelpers
     end
   end
 
-  def render_liquid_tag(tag_name, content, markup = '')
+  def render_liquid_tag(tag_name, content, markup = '', registers = {})
     Liquid::Environment.default.error_mode = :strict
     template = Liquid::Template.parse("{% #{tag_name} #{markup} %}#{content}{% end#{tag_name} %}")
     # puts "{% #{tag_name} #{markup} %}\n#{content}{% end#{tag_name} %}"
-    template.render({}, registers: { markdown_renderer: TestMarkdownRenderer.new.renderer }, rethrow_errors: true)
+    template.render({}, registers: {
+      markdown_renderer: TestMarkdownRenderer.new.renderer,
+  }.merge(registers), rethrow_errors: true)
   end
 
   def register_liquid_tag(tag_name, tag_class)

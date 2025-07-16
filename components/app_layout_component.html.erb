@@ -13,16 +13,14 @@
           <%= render AppLayout::SidebarComponent.new(site: site, current_page: current_page) %>
 
           <main class="min-w-0 flex-1 gap-x-12 pt-8 pb-16 lg:pt-12">
-            <div class="max-w-2xl">
-              <% if current_page.parent.present? && current_page.parent.request_path != '/' %>
-                <p class="text-xs uppercase text-zinc-500 dark:text-zinc-400">
-                  <%= current_page.parent.data.fetch("title", File.basename(current_page.parent.request_path)) %>
-                </p>
-              <% end %>
+            <% if current_page.parent.present? && current_page.parent.request_path != '/' %>
+              <p class="text-xs mb-2 uppercase text-zinc-500 dark:text-zinc-400">
+                <%= current_page.parent.data.fetch("title", File.basename(current_page.parent.request_path)) %>
+              </p>
+            <% end %>
 
-              <div class="prose dark:prose-invert">
-                <%= content %>
-              </div>
+            <div class="prose dark:prose-invert !max-w-none">
+              <%= content %>
             </div>
           </main>
 

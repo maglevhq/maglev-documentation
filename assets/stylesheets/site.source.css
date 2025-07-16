@@ -9,6 +9,9 @@
 
 @plugin "@tailwindcss/typography";
 
+@theme {
+  --font-sans: InterVariable, sans-serif;
+}
 
 @layer base {
   html {

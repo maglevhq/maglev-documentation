@@ -15,9 +15,10 @@ x write a script to import all the pages from gitbook
   - implement liquid tags
     x hint
     x table
-    - tabs
+    x tabs
     - code
       - copy to the clipboard
+- Plausible (settings.yml)
 - generate a markdown file for the whole site (to be consumed by a local AI)
 - github action to deploy the code
 
