@@ -78,6 +78,8 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     tabs_html.each_with_index do |html, index|
       full_document.gsub!("<!-- tabs##{index} -->", html)
     end
+    # Add data-controller="copy-code" to all <code> tags
+    full_document.gsub!(/<code(?![^>]*data-controller)/, '<code data-controller="copy-code"')
     full_document
   end
 
