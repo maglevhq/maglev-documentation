@@ -6,18 +6,19 @@ x generate the page nav
   x anchors
 x page description
 x write a script to import all the pages from gitbook
+x markdown
+  x implement liquid tags
+    x hint
+    x table
+    x tabs
+    x code
+      x copy to the clipboard
+x fix the mobile version topbar nav
 - basic search engine
 - favicon
 - handle: redirect_to
 - next/previous page
 - sticky folder name in the navbar
-- markdown
-  - implement liquid tags
-    x hint
-    x table
-    x tabs
-    - code
-      - copy to the clipboard
 - Plausible (settings.yml)
 - generate a markdown file for the whole site (to be consumed by a local AI)
 - github action to deploy the code

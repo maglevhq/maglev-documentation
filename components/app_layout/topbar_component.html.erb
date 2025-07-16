@@ -1,4 +1,4 @@
-<div class="sticky top-0 z-10 border-b border-zinc-950/10 bg-white px-6 py-5 sm:px-8 lg:z-10 lg:flex lg:h-16 lg:items-center lg:py-0 dark:border-white/10 dark:bg-zinc-900">
+<div class="sticky top-0 z-20 border-b border-zinc-950/10 bg-white px-6 py-5 sm:px-8 lg:z-10 lg:flex lg:h-16 lg:items-center lg:py-0 dark:border-white/10 dark:bg-zinc-900">
   <div class="mx-auto flex w-full max-w-xl items-center justify-between lg:max-w-7xl">
     <div class="flex items-center gap-2 sm:gap-4">
       <%= link_to '/', class: 'flex items-center gap-2', aria: { label: 'Home' } do %>
@@ -8,7 +8,9 @@
     </div>
 
     <div class="flex items-center gap-4 sm:gap-8">
-      <%= links %>
+      <div class="hidden lg:block">
+        <%= links %>
+      </div>
 
       <button
         type="button"
@@ -46,38 +48,19 @@
 
   <div class="mx-auto mt-5 flex max-w-xl lg:hidden">
     <span data-slot="control" class="group relative block w-full before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:bg-white before:shadow-sm dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset has-data-focus:after:ring-2 has-data-focus:after:ring-blue-500 has-data-disabled:opacity-50 has-data-disabled:before:bg-zinc-950/5 has-data-disabled:before:shadow-none">
-      <select class="relative block w-full appearance-none rounded-lg py-[calc(--spacing(2.5)-1px)] sm:py-[calc(--spacing(1.5)-1px)] pr-[calc(--spacing(10)-1px)] pl-[calc(--spacing(3.5)-1px)] sm:pr-[calc(--spacing(9)-1px)] sm:pl-[calc(--spacing(3)-1px)] [&amp;_optgroup]:font-semibold text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white dark:*:text-white border border-zinc-950/10 data-hover:border-zinc-950/20 dark:border-white/10 dark:data-hover:border-white/20 bg-transparent dark:bg-white/5 dark:*:bg-zinc-800 focus:outline-hidden data-invalid:border-red-500 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-600 dark:data-invalid:data-hover:border-red-600 data-disabled:border-zinc-950/20 data-disabled:opacity-100 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/2.5 dark:data-hover:data-disabled:border-white/15" id="headlessui-select-:Rcqkva:" data-headlessui-state="">
-        <option value="/docs" selected="">Getting started</option>
-        <optgroup label="Layouts">
-          <option value="/docs/sidebar-layout">Sidebar layout</option>
-          <option value="/docs/stacked-layout">Stacked layout</option>
-          <option value="/docs/auth-layout">Auth layout</option>
-        </optgroup>
-        <optgroup label="Components">
-          <option value="/docs/alert">Alert</option>
-          <option value="/docs/avatar">Avatar</option>
-          <option value="/docs/badge">Badge</option>
-          <option value="/docs/button">Button</option>
-          <option value="/docs/checkbox">Checkbox</option>
-          <option value="/docs/combobox">Combobox</option>
-          <option value="/docs/description-list">Description list</option>
-          <option value="/docs/dialog">Dialog</option>
-          <option value="/docs/divider">Divider</option>
-          <option value="/docs/dropdown">Dropdown</option>
-          <option value="/docs/fieldset">Fieldset</option>
-          <option value="/docs/heading">Heading</option>
-          <option value="/docs/input">Input</option>
-          <option value="/docs/listbox">Listbox</option>
-          <option value="/docs/navbar">Navbar</option>
-          <option value="/docs/pagination">Pagination</option>
-          <option value="/docs/radio">Radio button</option>
-          <option value="/docs/select">Select</option>
-          <option value="/docs/sidebar">Sidebar</option>
-          <option value="/docs/switch">Switch</option>
-          <option value="/docs/table">Table</option>
-          <option value="/docs/text">Text</option>
-          <option value="/docs/textarea">Textarea</option>
-        </optgroup>
+      <select class="relative block w-full appearance-none rounded-lg py-[calc(--spacing(2.5)-1px)] sm:py-[calc(--spacing(1.5)-1px)] pr-[calc(--spacing(10)-1px)] pl-[calc(--spacing(3.5)-1px)] sm:pr-[calc(--spacing(9)-1px)] sm:pl-[calc(--spacing(3)-1px)] [&amp;_optgroup]:font-semibold text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white dark:*:text-white border border-zinc-950/10 data-hover:border-zinc-950/20 dark:border-white/10 dark:data-hover:border-white/20 bg-transparent dark:bg-white/5 dark:*:bg-zinc-800 focus:outline-hidden data-invalid:border-red-500 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-600 dark:data-invalid:data-hover:border-red-600 data-disabled:border-zinc-950/20 data-disabled:opacity-100 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/2.5 dark:data-hover:data-disabled:border-white/15"
+      onchange="window.location.href = this.value">
+        <% pages.each do |page| %>
+          <% if !page.children? %>
+            <option value="<%= page.path %>" <%= 'selected' if page.path == current_page.path %>><%= page.title %></option>
+          <% else %>
+            <optgroup label="<%= page.title %>">
+              <% page.children.each do |child| %>
+                <option value="<%= child.path %>" <%= 'selected' if child.resource == current_page %>><%= child.title %></option>
+              <% end %>
+            </optgroup>
+          <% end %>
+        <% end %>
       </select>
       <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
         <svg class="size-5 stroke-zinc-500 group-has-data-disabled:stroke-zinc-600 sm:size-4 dark:stroke-zinc-400 forced-colors:stroke-[CanvasText]" viewBox="0 0 16 16" aria-hidden="true" fill="none">
