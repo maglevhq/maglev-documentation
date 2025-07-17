@@ -11,7 +11,7 @@ class AppLayoutComponent < ViewComponent::Base
   def pages
     site.root.children.map do |node|
       Page.build(node)
-    end.sort_by(&:order).unshift(Page.build(site.root, recursive: false))
+    end.compact.sort_by(&:order).unshift(Page.build(site.root, recursive: false))
   end
 
   class Page
@@ -41,6 +41,8 @@ class AppLayoutComponent < ViewComponent::Base
       resource = node.resources.first
       data = resource.data
       path = resource.data['redirect_to'] ? nil : resource.request_path
+
+      return nil if data['sidebar'] == false
 
       new(
         title: data.fetch("title", File.basename(resource.request_path)),

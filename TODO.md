@@ -23,10 +23,11 @@ x basic search engine
 x script: download the images from Gitbook (+ update the script)
 x anchor link
 x generate a markdown file for the whole site (to be consumed by a local AI) -> create a page!!!
-- first deployment:
+x first deployment:
   x create S3 bucket
   x add a task to re-index the content
-  - github action to deploy the code
+  x github action to deploy the code
+x 404 error page
 
 ? next/previous page
 ? run AI to fix English sentences
