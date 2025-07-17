@@ -5,19 +5,17 @@ order: 1
 
 # Introduction
 
-
-
 {% hint style="info" %}
 Please visit our[ new MaglevPRO site](https://www.maglev.dev/saas-edition) to learn more it.
 {% endhint %}
 
-The open source version of Maglev only allows you to create and edit one single site. 
+The open source version of Maglev only allows you to create and edit one single site.
 
 The PRO version overpasses this limitation by making the multi-sites and multi-themes functionalities available.
 
 It becomes then the best dev tool to build your own custom page builder platform.
 
-Basically, you can set up hundreds of websites in a few clicks for your clients or franchisees and more important, you can do it from your own Ruby on Rails application. 
+Basically, you can set up hundreds of websites in a few clicks for your clients or franchisees and more important, you can do it from your own Ruby on Rails application.
 
 It's the perfect CMS for:
 

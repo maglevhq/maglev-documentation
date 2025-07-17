@@ -7,7 +7,7 @@ order: 4
 
 A page belongs to a site. It carries the content of the section.
 
-### Attributes
+## Attributes
 
 | Name              | Type             | Description                                                                      |
 | ----------------- | ---------------- | -------------------------------------------------------------------------------- |

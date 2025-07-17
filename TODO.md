@@ -14,13 +14,20 @@ x markdown
     x code
       x copy to the clipboard
 x fix the mobile version topbar nav
-- handle: redirect_to
-- favicon
-- sticky folder name in the navbar
-- Plausible (settings.yml)
+x handle: redirect_to
+x favicon
+x sticky folder name in the navbar
+x Plausible (settings.yml)
+x h1 > h2 > h3
+- generate a markdown file for the whole site (to be consumed by a local AI) -> create a page!!!
+- anchor link
 - basic search engine
-- next/previous page
-- generate a markdown file for the whole site (to be consumed by a local AI)
+  - create a Algolia account
+  - rake task to re-build an index based on the Markdown files
+  - install instantsearch.js
+  - pimp the UI
 - github action to deploy the code
 
+? next/previous page
 ? run AI to fix English sentences
+? replace TODO items?

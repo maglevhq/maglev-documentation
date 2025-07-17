@@ -5,17 +5,17 @@ order: 5
 
 # Secure the editor
 
-In the Maglev Rails engine, we managed to avoid relying on any specific authentication system such as [Devise](https://github.com/heartcombo/devise). 
+In the Maglev Rails engine, we managed to avoid relying on any specific authentication system such as [Devise](https://github.com/heartcombo/devise).
 
 The counter part is this is now up to the developer installing Maglev to let Maglev know if the current user of his application has the rights to access the Editor UI.
 
 There are 2 major UI parts in Maglev: the Editor UI and the Admin UI. Those 2 parts don't require the same authentication mechanism.
 
-### Editor UI authentication
+## Editor UI authentication
 
 You, as the developer, can pick one of the 2 ways of verifying whether the current user of the main application is allowed or not to access the Editor UI.
 
-* either you pass the name of a method globally available 
+* either you pass the name of a method globally available
 * or you pass a Proc that will be executed in the context of the Maglev::EditorUI controller which inherits not directly from the ApplicationController class of the main application.
 
 {% code title="config/initializers/maglev.rb" %}
@@ -46,7 +46,7 @@ end
 ```
 {% endcode %}
 
-#### Example: very simple authentication system
+### Example: very simple authentication system
 
 For simple projects, installing a gem like Devise can be a little cumbersome. So, here is a very simple way to still protect the editor UI.
 
@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_maglev_editor(site)
     http_basic_authenticate_or_request_with(
-      name: ENV.fetch('MAGLEV_EDITOR_USERNAME'), 
+      name: ENV.fetch('MAGLEV_EDITOR_USERNAME'),
       password: ENV.fetch('MAGLEV_EDITOR_PASSWORD'),
     )
   end
@@ -87,9 +87,9 @@ end
 Of course, you will have to set 2 new **ENV variables** in your project: `MAGLEV_EDITOR_USERNAME` and `MAGLEV_EDITOR_PASSWORD`.
 {% endhint %}
 
-### Admin UI authentication
+## Admin UI authentication
 
-By default, the Admin UI is available without any credentials in the development and test environments. 
+By default, the Admin UI is available without any credentials in the development and test environments.
 
 In production, it will require an username and password that can defined in the Maglev config file like this:
 

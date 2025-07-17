@@ -15,11 +15,11 @@ When you genarate a new section through a Rails generator, you end up with the f
 
 ```
 Rails app root
-└── app   
+└── app
     ├── ...
     ├── controllers
     ├── ...
-    └── theme 
+    └── theme
         ├── sections
             ├── heroes
                 └── heroe_01.yml
@@ -35,14 +35,14 @@ Rails app root
                 └── cta
                     └── cta_01.html.erb
             └── layout.html.erb
-        
+
 ```
 
 {% hint style="danger" %}
 The id of a section is the base name of their definition file name. Example: heroe\_01 for heroe\_01.yml.
 {% endhint %}
 
-### Definition file
+## Definition file
 
 | Attribute name            | Type              | Description                                                                                                                                                                 |
 | ------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -73,11 +73,11 @@ category: heroes
 ```
 {% endcode %}
 
-### Template
+## Template
 
-Inside your section template file, you'll have access to a variable named `maglev_section` exposing the content written by the editors. 
+Inside your section template file, you'll have access to a variable named `maglev_section` exposing the content written by the editors.
 
-This variable owns a couple of attributes / methods. 
+This variable owns a couple of attributes / methods.
 
 | Attribute / Method | Type  | Description                                                                                                                                                                                          |
 | ------------------ | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -91,9 +91,9 @@ The section must be wrapped by a single HTML node (DIV, SECTION, ...etc). This n
 
 {% code title="hero_01.html.erb" %}
 ```markup
-<%= maglev_section.wrapper_tag 
-      class: 'py-8 px-4', 
-      style: "background-image: maglev_section.settings.background-image" do 
+<%= maglev_section.wrapper_tag
+      class: 'py-8 px-4',
+      style: "background-image: maglev_section.settings.background-image" do
 %>
   <%= maglev_section.setting_tag :title, html_tag: 'h2', class: 'my-css-class' %>
 <% end %>
@@ -104,8 +104,8 @@ You've got also the ability to not use our helpers and write plain HTML code ins
 
 {% code title="heroe_01.html.erb" %}
 ```markup
-<div 
-  class="py-8 px-4" 
+<div
+  class="py-8 px-4"
   style="background-image: <%= section.settings.background-image %>"
   <%= section.dom_data %>
 >

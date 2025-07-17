@@ -7,7 +7,7 @@ order: 3
 
 We designed the Editor UI in a minimalist way so that most content editors will quickly be able to edit the content of their site without too much help.
 
-### Tweak the Editor UI
+## Tweak the Editor UI
 
 We went a little further than that. Developers can also tweak the UI to enhance the feeling that content editors are at home. It means that all the references to Maglev displayed in the UI can be replaced by custom content.
 
@@ -15,7 +15,7 @@ By default, here is a quick sample of the Editor UI:
 
 ![the Maglev Editor UI with the default style.](https://1311630049-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-Me54MJUO0o8Vj5WCTWJ%2F-MeUwrTI6TuqN8mdhZtm%2F-MekxQC_Ueu6lgqhQ9BW%2Feditor-ui-default.jpg?alt=media\&token=58e1782a-00c2-4b29-8ff3-0988a90d7517)
 
-During the Maglev installation, a new file was added in your Rails application at the following location `config/initializers/maglev.rb`. 
+During the Maglev installation, a new file was added in your Rails application at the following location `config/initializers/maglev.rb`.
 
 ```ruby
 Maglev.configure do |c|
@@ -37,7 +37,7 @@ Maglev.configure do |c|
   # c.back_action = 'https://www.myapp.dev' # External url
   # c.back_action = :my_account_path # name of the route in your Rails application
   # c.back_action = ->(site) { redirect_to main_app.my_account_path(site_id: site.id) }
-  
+
   # I18n locale used in the Editor UI (by default, I18n.locale will be used)
   # config.ui_locale = 'fr' # make sure your locale has been registered in Rails.
   # config.ui_locale = :find_my_locale # name of a protected method from your Rails application controller

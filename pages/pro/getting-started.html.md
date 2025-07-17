@@ -5,7 +5,7 @@ order: 2
 
 # Getting started
 
-### Installation
+## Installation
 
 🎉 Once you have purchased a [license for Maglev PRO](https://packages.nocoffee.fr/stripe/packages/maglevcms-pro/payment_links/new), you will receive an email containing the license key needed to install the Maglev PRO gem, along with instructions for adding this gem to your application's Gemfile.
 
@@ -23,7 +23,7 @@ end
 gem 'maglevcms', '~> 1.7.3', require: false
 ```
 
-**Note:** the license key is the one you got from the email you receive after the purchase. If you deleted the email, no worries, send us an email at [contact@maglev.dev](mailto:contact@maglev.dev). 
+**Note:** the license key is the one you got from the email you receive after the purchase. If you deleted the email, no worries, send us an email at [contact@maglev.dev](mailto:contact@maglev.dev).
 
 And then execute:
 
@@ -31,7 +31,7 @@ And then execute:
 $ bundle install
 ```
 
-### Prepare your app
+## Prepare your app
 
 Execute once the Maglev PRO installation generator within the folder of your rails app and follow screen instructions.
 
@@ -44,7 +44,7 @@ To function properly, Maglev PRO needs to identify which of your Rails models wi
 $ bundle exec rails g maglev:install
 ```
 
-### Create a theme and a first section
+## Create a theme and a first section
 
 Create a first theme
 
@@ -66,7 +66,7 @@ $ bundle exec rails s
 
 Please visit [http://localhost:3000/maglev/admin](http://localhost:3000/maglev/admin), you will see your new theme and section.
 
-### \[OPTIONAL] Embed a default theme in your application
+## \[OPTIONAL] Embed a default theme in your application
 
 {% hint style="info" %}
 The `maglev-hyperui-kit` gem includes a library of marketing sections based on [hyperui](https://www.hyperui.dev/), a free open source tailwindcss components.
@@ -116,7 +116,7 @@ site = Maglev::Pro::GenerateSite.call(siteable: my_account, theme_id: 'simple', 
 ```
 
 {% hint style="info" %}
-In the next steps, inside your Rails application, you'll have to call the **Maglev::Pro::GenerateSite** service from one of your controller action, a model callback or your own service. 
+In the next steps, inside your Rails application, you'll have to call the **Maglev::Pro::GenerateSite** service from one of your controller action, a model callback or your own service.
 {% endhint %}
 
 In order to get the editor UI url, in the Rails console, type:
@@ -135,10 +135,10 @@ However, most of the time, you will need to generate this link within your main 
 <% end %>
 ```
 
-### Going further
+## Going further
 
-Congratulations, you now have Maglev PRO up and running within your Rails application! 
+Congratulations, you now have Maglev PRO up and running within your Rails application!
 
-It's time to start writing the sections for your themes 💪🚀. 
+It's time to start writing the sections for your themes 💪🚀.
 
 Please refer to the concepts and guides for more information.

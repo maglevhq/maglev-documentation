@@ -18,24 +18,24 @@ Instructions to install the single-site version (or MIT version) of Maglev
 - Node 20+
 {% endhint %}
 
-### Short version (1 minute installation) 😎
+## Short version (1 minute installation) 😎
 
-We wrote a Rails application template which will generate a brand new **Ruby on Rails 8** application with Maglev already setup. 
+We wrote a Rails application template which will generate a brand new **Ruby on Rails 8** application with Maglev already setup.
 
 ```bash
 $ rails new my-awesome-site \
   -m https://raw.githubusercontent.com/maglevhq/maglev-core/master/template.rb \
   --skip-action-cable
-  
+
 $ cd my-awesome-site
 $ bundle exec rails server
 ```
 
-🎉 Congratulations! A random home page has been initialized with some content, check it out here: [http://localhost:3000/](http://localhost:3000/) 
+🎉 Congratulations! A random home page has been initialized with some content, check it out here: [http://localhost:3000/](http://localhost:3000/)
 
 If you want to modify the content, go to this url: [http://localhost:3000/maglev/editor](http://localhost:3000/maglev/editor). 🚀
 
-### Long version 🤓
+## Long version 🤓
 
 First generate a new Ruby on Rails application. You can skip this step if you've got an existing application.
 
@@ -61,7 +61,7 @@ $ bundle exec rails active_storage:install
 $ bundle exec rails db:migrate
 ```
 
-Add now the Maglev engine to your app Gemfile file. 
+Add now the Maglev engine to your app Gemfile file.
 
 {% code title="Gemfile" %}
 ```ruby
@@ -71,7 +71,7 @@ gem 'maglevcms-hyperui-kit', '~> 1.2.0'
 {% endcode %}
 
 {% hint style="info" %}
-the `maglev-hyperui-kit` gem includes a library of marketing sections based on [hyperui](https://www.hyperui.dev), a free open source tailwindcss components.  
+the `maglev-hyperui-kit` gem includes a library of marketing sections based on [hyperui](https://www.hyperui.dev), a free open source tailwindcss components.
 {% endhint %}
 
 Setup Maglev
@@ -88,6 +88,6 @@ Launch your rails app
 $ bundle exec rails s
 ```
 
-🎉 Congratulations! A random home page has been initialized with some content, check it out here: [http://localhost:3000/](http://localhost:3000/) 
+🎉 Congratulations! A random home page has been initialized with some content, check it out here: [http://localhost:3000/](http://localhost:3000/)
 
 If you want to modify the content, go to this url: [http://localhost:3000/maglev/editor](http://localhost:3000/maglev/editor). 🚀

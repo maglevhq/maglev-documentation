@@ -7,7 +7,7 @@ order: 4
 
 You can set up your site so that you can edit the content of your pages in different languages or locales.
 
-### Installation
+## Installation
 
 The installation of new locales is an easy job to do.
 
@@ -18,7 +18,7 @@ Open your `config/initializers/maglev.rb` file and start adding the following li
 Maglev.configure do |config|
   ...
   config.default_site_locales = [
-   { label: 'English', prefix: 'en' }, 
+   { label: 'English', prefix: 'en' },
    { label: 'French', prefix: 'fr' }
   ]
   ...
@@ -61,7 +61,7 @@ Here is an example:
 
 
 
-### Rules
+## Rules
 
 The multi-languages functionality comes with several rules:
 

@@ -11,16 +11,16 @@ A `section` references a list of `block` types.
 A section might have no section in its definition.
 {% endhint %}
 
-Here are some examples when having block types is useful: 
+Here are some examples when having block types is useful:
 
-* a **header** section will need a **menu\_item** block type to describe the top menu. 
+* a **header** section will need a **menu\_item** block type to describe the top menu.
 * a **carousel** section will need different **vignette** block types if it wants to display a list of mixed image and video vignettes.
 * a **faq** section will need a **question\_answer** block type to list all the questions and their answers.
 
 By default, in the editor UI, the instance of blocks are displayed as a list which can be re-ordered.\
 But in some case, a list will be too restrictive and a tree representation will be more appropriate. So, you will have to set the `block_display`  attribute to **true** in the section definition.
 
-### Definition file
+## Definition file
 
 Block types are declared in the same file as its parent section under the `blocks` attribute.
 
@@ -31,11 +31,11 @@ Block types are declared in the same file as its parent section under the `block
 | settings       | array of settings | Work the same as in the section definition.                                                                                 |
 | accept         | array of strings  | If the `blocks_presentation` option has been set to `tree`, a block can decide to accept several kind of other block types. |
 
-### Template
+## Template
 
-You can iterate through the list of blocks of your section. 
+You can iterate through the list of blocks of your section.
 
-Each maglev block owns a couple of attributes / methods. 
+Each maglev block owns a couple of attributes / methods.
 
 | Attribute / Method | Type    | Description                                                                                                                                                                                   |
 | ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -50,7 +50,7 @@ Each maglev block owns a couple of attributes / methods.
   <ul>
     <% maglev_section.blocks.each do |maglev_block| %>
       <%= maglev_block.wrapper_tag.li do %>
-        <%= maglev_block.setting_tag :link do %>         
+        <%= maglev_block.setting_tag :link do %>
           <%= maglev_block.setting_tag :label %>
         <% end %>
       <% end %>
@@ -70,14 +70,14 @@ The same way we do in the `section` template,  you've to instruct the editor UI 
       <li <%= maglev_block.dom_data %>>
         <a href="<%= maglev_block.settings.link.href %>" <% if maglev_block.settings.link.open_new_window? %>target="_blank"<% end %>>
           <span <%= maglev_block.settings.label.dom_data %> ><%= maglev_block.settings.label %></span>
-        </a>    
+        </a>
       </li>
     <% end %>
   </ul>
 </nav>
 ```
 
-### Template with block children
+## Template with block children
 
 {% code title="navbar_01.html.erb" %}
 ```markup

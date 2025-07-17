@@ -4,54 +4,17 @@
 # Site Information
 site:
   title: "Maglev Documentation"
-  description: "Documentation for the Maglev framework"
-  author: "Your Name"
-  email: "your.email@example.com"
-  url: "https://your-site.com"
 
-# Navigation
-navigation:
-  show_search: true
-  show_breadcrumbs: true
-  sidebar_collapsible: true
-  max_menu_depth: 3
-
-# Content Settings
-content:
-  show_table_of_contents: true
-  toc_depth: 3
-  show_edit_link: true
-  edit_link_text: "Edit this page"
-  show_last_updated: true
-  code_highlighting: true
-  syntax_theme: "github"
-
-# Appearance
 appearance:
   theme: "light"
-  primary_color: "#3b82f6"
-  secondary_color: "#64748b"
-  font_family: "Inter, system-ui, sans-serif"
-  code_font_family: "JetBrains Mono, Consolas, monospace"
 
 # Features
 features:
   analytics_enabled: false
-  comments_enabled: false
   search_enabled: true
-  print_enabled: true
-  dark_mode_toggle: true
-  theme_persistence: true
-
-# Social Media
-social:
-  twitter: "@yourhandle"
-  github: "your-username"
-  linkedin: "your-profile"
 
 # SEO
 seo:
-  google_analytics_id: ""
-  google_tag_manager_id: ""
+  plausible_domain: "docs.maglev.dev"
   meta_description: "Documentation for the Maglev framework"
   meta_keywords: "maglev, documentation, framework"

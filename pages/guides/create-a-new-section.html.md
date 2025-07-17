@@ -7,17 +7,17 @@ order: 1
 
 This guide helps you to create a maglev section and integrates it in the editor UI.
 
-### Generate the section files
+## Generate the section files
 
 The **maglev** gem offers a Rails generator to quickly generate the files required by a maglev section.
 
-The following command will generate a sample section with a few settings and blocks. 
+The following command will generate a sample section with a few settings and blocks.
 
 ```bash
 > bundle exec rails g maglev:section example
 ```
 
-#### Syntax
+### Syntax
 
 ```bash
 > bundle exec rails g maglev:section <ID of your section> \
@@ -32,7 +32,7 @@ block:<TYPE>:<ID of setting N>:<TYPE> \
 
 ```
 
-#### Example
+### Example
 
 Here is an example of a section with one single type of block
 
@@ -44,7 +44,7 @@ title:text overall_description:text \
 block:project:name:text block:project:screenshot:image
 ```
 
-### Code the section
+## Code the section
 
 Once the different files of the section have been generated, it's time to complete the definition and template files.
 
@@ -58,7 +58,7 @@ There are 3 different buttons on this screen:
 * **Open in a new tab**: it opens the section in a new tab without the maglev admin layout. Very useful when coding the template of the section.
 * **Take screenshot**: once your section looks good (please visit the next sub chapter before) , it's time to take a screenshot of it for the editor UI. It will be displayed in the list of sections available for the editors.
 
-### Provide a sample content
+## Provide a sample content
 
 Providing a sample content for a section is helpful in 3 main cases:
 
@@ -68,7 +68,7 @@ Providing a sample content for a section is helpful in 3 main cases:
 
 This can be achieved by declaring the **sample** attribute in the definition file of the section.
 
-#### Example:
+### Example:
 
 {% code title="app/theme/sections/showcase_01.yml" %}
 ```yaml
@@ -86,8 +86,8 @@ blocks:
 # The title can be changed with the following property:
 # blocks_label: "My list of items"
 
-# By default, blocks are presented as a list in the editor UI. 
-# If you like to use blocks to build a menu with sub menu items, 
+# By default, blocks are presented as a list in the editor UI.
+# If you like to use blocks to build a menu with sub menu items,
 # consider using the tree presentation
 # blocks_presentation: "tree"
 
@@ -95,30 +95,24 @@ sample:
   settings:
     title: "Let's create the product<br/>your clients<br/>will love."
     image: "/maglev-placeholder.jpg"
-  blocks: 
+  blocks:
     - type: list_item
-      settings: 
+      settings:
         title: "Item #1"
         image: "/maglev-placeholder.jpg"
     - type: list_item
-      settings: 
+      settings:
         title: "Item #2"
         image: "/maglev-placeholder.jpg"
     - type: list_item
-      settings: 
+      settings:
         title: "Item #3"
         image: "/maglev-placeholder.jpg"
     - type: list_item
-      settings: 
+      settings:
         title: "Item #4"
         image: "/maglev-placeholder.jpg"
-  
+
 
 ```
 {% endcode %}
-
-
-
-
-
-###

@@ -18,7 +18,7 @@ We built the **collections** feature for this exact use case.
 We could also have built within Maglev a content type builder like what [Strapi](https://strapi.io) offers but we believe that **Rails** in combination with [ActiveAdmin](https://activeadmin.info) or [Avo](https://avohq.io) does a more reliable job in the long run. Besides Maglev only targets the visual editing part of a CMS.
 {% endhint %}
 
-### Define collections
+## Define collections
 
 Maglev requires a mapping object defined in its config file to expose the ActiveRecord models that will be used by the Maglev sections.
 
@@ -73,7 +73,7 @@ end
 {% endcode %}
 {% endhint %}
 
-### Handle custom DB query
+## Handle custom DB query
 
 By default, the **collections** feature will perform a simple SQL query to fetch the items for the Maglev editor UI component. \
 \
@@ -130,6 +130,6 @@ end
 ```
 {% endcode %}
 
-### Use collections in sections
+## Use collections in sections
 
 Please visit the documentation [here](https://docs.maglev.dev/concepts/setting#collection_item).

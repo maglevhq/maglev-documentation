@@ -5,26 +5,26 @@ order: 3
 
 # Theme
 
-A Maglev site is referenced by a `theme` and a `theme` includes sections. 
+A Maglev site is referenced by a `theme` and a `theme` includes sections.
 
 You can't create a site without a theme.
 
 {% hint style="info" %}
 The MIT version of Maglev comes with a single theme and it's not possible to add another theme. \
-To enable the **multi-sites / multi-themes** functionalities, you need the licensed version. 
+To enable the **multi-sites / multi-themes** functionalities, you need the licensed version.
 
 Please [contact us](https://www.maglev.dev/contact) for more details.
 {% endhint %}
 
-During the Maglev installation, a couple of files were added by our generators. 
+During the Maglev installation, a couple of files were added by our generators.
 
 ```
 Rails app root
-└── app   
+└── app
     ├── ...
     ├── controllers
     ├── ...
-    └── theme 
+    └── theme
         ├── sections
         └── theme.yml
     └── views
@@ -32,10 +32,10 @@ Rails app root
         └── theme
             ├── sections
             └── layout.html.erb
-        
+
 ```
 
-### Definition file
+## Definition file
 
 The `theme.yml` file describes the definition (name, description, ...etc) of the theme.
 
@@ -69,9 +69,9 @@ pages:
   path:  "/index"
 ```
 
-### Template
+## Template
 
-The `layout.html.erb` is being rendered by the Maglev CMS functionality. 
+The `layout.html.erb` is being rendered by the Maglev CMS functionality.
 
 The minimal requirement is to have the following **ERB** code inside this file:
 
