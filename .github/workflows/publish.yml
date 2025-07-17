@@ -9,13 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '24'
+    - name: Install yarn
+      run: npm install -g yarn
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: "3.4"
         bundler-cache: true
     - name: Install dependencies
-      run: bundle install
+      run: |
+        bundle install
+        yarn install
     - name: Install AWS CLI
       uses: unfor19/install-aws-cli-action@v1
     - name: Build and publish website

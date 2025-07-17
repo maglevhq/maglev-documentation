@@ -46,6 +46,8 @@ end
 
 desc "Compile the sitepress site"
 task :compile do
+  sh 'npx @tailwindcss/cli -i ./assets/stylesheets/site.source.css -o ./assets/stylesheets/site.css --minify'
+  sh 'yarn esbuild ./assets/javascripts/site.source.js --bundle --outfile=./assets/javascripts/site.js --minify'
   sh 'bundle exec ./scripts/generate_search_index.rb'
   sh 'bundle exec sitepress compile'
   sh 'bundle exec ./scripts/generate_llm_markdown.rb'
