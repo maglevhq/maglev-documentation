@@ -56,8 +56,13 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
 
     id = text.parameterize
     <<-HTML
-      <h#{header_level} id="#{id}" class="scroll-mt-20">
-        #{text}
+      <h#{header_level} id="#{id}" class="scroll-mt-20 relative group/hash flex items-center">
+        <div class="-ml-8 pr-2 relative group-hover/hash:opacity-100 opacity-0 transition-opacity">
+          <a href="##{id}" class="text-gray-400 group-hover/hash:text-gray-600 transition-colors">
+            <i class="fa-solid fa-hashtag"></i>
+          </a>
+        </div>
+        <span>#{text}</span>
       </h#{header_level}>
     HTML
   end

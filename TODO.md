@@ -21,9 +21,12 @@ x Plausible (settings.yml)
 x h1 > h2 > h3
 x basic search engine
 x script: download the images from Gitbook (+ update the script)
+x anchor link
 - generate a markdown file for the whole site (to be consumed by a local AI) -> create a page!!!
-- anchor link
-- github action to deploy the code
+- first deployment:
+  - create S3 bucket
+  - add a task to re-index the content
+  - github action to deploy the code
 
 ? next/previous page
 ? run AI to fix English sentences
