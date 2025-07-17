@@ -50,6 +50,8 @@ task :compile do
   sh 'yarn esbuild ./assets/javascripts/site.source.js --bundle --outfile=./assets/javascripts/site.js --minify'
   sh 'bundle exec ./scripts/generate_search_index.rb'
   sh 'bundle exec sitepress compile'
+  sh "mv ./build/404/index.html ./build/404.html"
+  sh "rm -rf ./build/404"
   sh 'bundle exec ./scripts/generate_llm_markdown.rb'
   Rake::Task[:compile_sitemap].invoke
 end
