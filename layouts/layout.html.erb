@@ -41,7 +41,8 @@
     <%= javascript_include_tag 'site', defer: true %>
 
     <% if settings.features['analytics_enabled'] %>
-      <script defer data-domain="<%= settings.seo['plausible_domain'] %>" src="https://plausible.io/js/script.js"></script>
+      <script defer data-domain="docs.maglev.dev" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+      <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
     <% end %>
   </head>
   <body class="font-sans">

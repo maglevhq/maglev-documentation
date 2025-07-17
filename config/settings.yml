@@ -10,7 +10,7 @@ appearance:
 
 # Features
 features:
-  analytics_enabled: false
+  analytics_enabled: true
   search_enabled: true
 
 # SEO
