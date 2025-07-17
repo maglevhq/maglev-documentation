@@ -51,6 +51,7 @@ task :compile do
   sh 'bundle exec ./scripts/generate_search_index.rb'
   sh 'bundle exec sitepress compile'
   sh 'bundle exec ./scripts/generate_llm_markdown.rb'
+  Rake::Task[:compile_sitemap].invoke
 end
 
 namespace :publish do
@@ -63,6 +64,12 @@ namespace :publish do
   task :pages do
     sh "aws s3 sync ./build s3://#{s3_bucket_name} --exclude 'assets/**' --cache-control max-age=60"
   end
+end
+
+desc "Compile the sitemap"
+task :compile_sitemap do
+  require_relative './lib/sitemap.rb'
+  Sitemap.compile(path: Dir.getwd, base_url: ENV['SITE_BASE_URL'])
 end
 
 desc "Upload pages and assets to S3"
