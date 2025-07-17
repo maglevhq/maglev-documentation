@@ -54,7 +54,8 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   def header(text, header_level)
     return "<h1>#{text}</h1>" if header_level == 1
 
-    id = text.parameterize
+    id = Nokogiri::HTML.fragment(text).text.parameterize
+
     <<-HTML
       <h#{header_level} id="#{id}" class="scroll-mt-20 relative group/hash flex items-center">
         <div class="-ml-8 pr-2 relative group-hover/hash:opacity-100 opacity-0 transition-opacity">
@@ -62,7 +63,7 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
             <i class="fa-solid fa-hashtag"></i>
           </a>
         </div>
-        <span>#{text}</span>
+        <div class="flex items-center prose-img:h-8 prose-img:m-0 prose-img:mr-4">#{text}</div>
       </h#{header_level}>
     HTML
   end

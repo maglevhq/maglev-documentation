@@ -4,6 +4,7 @@ order: 2
 ---
 
 # Quick start
+
 {% description %}
 Instructions to install the single-site version (or MIT version) of Maglev
 {% enddescription %}

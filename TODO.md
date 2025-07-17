@@ -22,10 +22,10 @@ x h1 > h2 > h3
 x basic search engine
 x script: download the images from Gitbook (+ update the script)
 x anchor link
-- generate a markdown file for the whole site (to be consumed by a local AI) -> create a page!!!
+x generate a markdown file for the whole site (to be consumed by a local AI) -> create a page!!!
 - first deployment:
-  - create S3 bucket
-  - add a task to re-index the content
+  x create S3 bucket
+  x add a task to re-index the content
   - github action to deploy the code
 
 ? next/previous page
