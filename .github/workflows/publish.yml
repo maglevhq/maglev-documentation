@@ -35,3 +35,4 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
           BUNNYCDN_ACCESS_KEY: ${{ secrets.BUNNYCDN_ACCESS_KEY }}
           BUNNYCDN_ZONE_ID: ${{ secrets.BUNNYCDN_ZONE_ID }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
