@@ -1,75 +1,75 @@
-# Getting started
+# Maglev Documentation
 
-Welcome to your new Sitepress site! If you know Rails, you'll feel right at home in Sitepress because it's built on top of Rails. There's a few things you'll need to know to get around:
+This repository contains the documentation site for Maglev, structured for clarity, extensibility, and ease of contribution. It is built on top of Sitepress and leverages Rails conventions, but introduces a custom structure for documentation content, components, and assets.
 
-## Starting the preview server
+## Project Structure
 
-First thing you'll want to do is start the preview server:
+- **pages/**: Main documentation content, organized into:
+  - `guides/`: Step-by-step guides and how-tos.
+  - `concepts/`: Explanations of core concepts and data structures.
+  - `pro/`: Pro features and advanced topics.
+  - `integrations/`: Integration guides for third-party tools.
+  - `index.html.md`: Main landing page for the docs.
 
-```sh
-$ sitepress server
+- **components/**: View components for reusable UI elements.
+  - `app_layout/`: Layout-related components (sidebar, topbar, navigation, etc.).
+  - `app_layout_component.*`: Main layout component files.
+
+- **assets/**: Static assets and frontend code.
+  - `images/`: Logos, favicons, and documentation screenshots (with subfolder for page-specific images).
+  - `stylesheets/`: CSS files, including Tailwind and code highlighting styles.
+  - `javascripts/`: JavaScript files, including Stimulus controllers for interactive features.
+  - `config/`: Asset pipeline configuration.
+
+- **liquid/**: Custom Liquid tags and concerns for dynamic content rendering inherited from Gitbook
+  - `tags/`: Custom tag implementations (e.g., code blocks, tabs, hints, descriptions).
+  - `tags/concerns/`: Shared logic for tags.
+
+- **layouts/**: HTML layout templates for the site.
+
+- **helpers/**: Ruby helpers for view logic shared across pages and layouts.
+
+- **config/**: Site configuration and initializers.
+
+- **scripts/**: Ruby scripts for automation (e.g., generating markdown, search indexes, migrations).
+
+- **spec/**: RSpec tests for custom tags and helpers.
+
+## Getting Started
+
+1. **Install dependencies:**
+   - Ruby gems: `bundle install`
+   - JavaScript packages: `yarn install`
+
+```bash
+gem install foreman
 ```
 
-Then open http://127.0.0.1:8080 and you'll see the welcome page.
+2. **Start the development server:**
+   ```sh
+   foreman start -f Procfile.dev
+   ```
+   Then open [http://127.0.0.1:8080](http://127.0.0.1:8080) to view the docs locally.
 
-## Layouts
+3. **Edit or add documentation:**
+   - Add or update markdown files in `pages/`.
+   - Add images to `assets/images/`.
+   - Update or create components in `components/`.
 
-To specify a layout for a page, add a `layout` key to the pages frontmatter. For example, if I create the layout `tech-support`, I'd add the following frontmatter to the top of a page in `pages/support/router.html.md`:
+4. **Compile for production:**
+   ```sh
+   bundle exec rake compile
+   ```
+   The static site will be built in the `./build` directory.
 
-```md
----
-title: How to fix a router
-layout: tech-support
----
+## Contributing
 
-# How to fix a router
+- Follow the established structure for new guides, concepts, or integrations.
+- Use components for reusable UI.
+- Use Stimulus controllers for JavaScript interactions.
+- Prefer Tailwind CSS classes for styling.
 
-1. Unplug the router.
-2. Plug in the router.
-```
+## More Information
 
-Sitepress will look for the layout in the `layouts` folder from the `layout` key in the file's frontmatter.
-
-Additionally, you may use the `render_layout` function in a page, or layout, to nest the layouts. For example, you could:
-
-```haml
----
-title: How to fix a scanner
----
-= render_layout "tech-support" do
-  %h1 How to fix a scanner
-
-  %ol
-    %li Unplug the scanner.
-    %li Plug in the scanner.
-```
-
-The `render_layout` can be used to nest a layout within a layout, which is a very powerful way to compose content pages.
-
-## File locations
-
-Like Rails, Sitepress organizes files in certain directories:
-
-* `pages` - This is where you'll edit the content. All `erb`, `haml`, and `md` files will be rendered and all other files will be served up. Support for other templating languages should work if you add them to the Gemfile and they already work with Rails.
-
-* `layouts` - Layouts for all pages may be found in this directory. Layouts are great for headers, footer, and other content that you'd otherwise be repeating across the files in `pages`.
-
-* `helpers` - Complex view code that you don't want to live in `page` or `layouts` can be extracted into helpers and re-used throughout the website. These are just like Rails helpers.
-
-* `assets` - If you want Sprockets to fingerprint and manage images, stylesheets, or scripts then put them in the `assets` directory.
-
-* `config` - All configuration files and initializers belong in this directory. The `config/site.rb` file has settings that can be changed for the Sitepress site. Changes made to this file require the `sitepress server` to be restarted.
-
-* `components` - Location of view component files.
-
-## Compiling & publishing the website
-
-Once you're satisfied with your website and you're ready to compile it into static HTML files, run `sitepress compile` and the website will be built to `./build`.
-
-## It's just Rails
-
-Anything you can do in Rails, you can do in Sitepress. If you find yourself needing more Rails for Sitepress, you could try adding it to the `Gemfile` and integrating it into your website. You can also embed and integrate Sitepress into a full-blown Rails app and serve up the content without statically compiling it.
-
-## More info
-
-Check out https://sitepress.cc for the latest and most up-to-date Sitepress documentation.
+- For more on Sitepress, see [https://sitepress.cc](https://sitepress.cc)
+- For Maglev documentation, browse this site or contribute via pull requests.
