@@ -36,7 +36,7 @@ Finally, restart your Rails server.
 
 Once it's done, go to the editor UI and you should see a locale picker like the one in the screenshot below.
 
-![](https://1311630049-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-Me54MJUO0o8Vj5WCTWJ%2Fuploads%2F8AM6K75RhYxdexYVPwhi%2FScreen%20Shot%202021-11-03%20at%2012.16.09%20AM.png?alt=media\&token=883dd67a-c533-4402-9a12-37883355a761)
+![](pages/setup-multiple-languages-1.png)
 
 ### Locale switcher
 

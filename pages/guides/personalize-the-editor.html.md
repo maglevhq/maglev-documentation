@@ -13,7 +13,7 @@ We went a little further than that. Developers can also tweak the UI to enhance 
 
 By default, here is a quick sample of the Editor UI:
 
-![the Maglev Editor UI with the default style.](https://1311630049-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-Me54MJUO0o8Vj5WCTWJ%2F-MeUwrTI6TuqN8mdhZtm%2F-MekxQC_Ueu6lgqhQ9BW%2Feditor-ui-default.jpg?alt=media\&token=58e1782a-00c2-4b29-8ff3-0988a90d7517)
+![the Maglev Editor UI with the default style.](pages/personalize-the-editor-1.jpg)
 
 During the Maglev installation, a new file was added in your Rails application at the following location `config/initializers/maglev.rb`.
 
@@ -52,7 +52,7 @@ end
 \
 By modifying the values within this file, you will be able to achieve something like this:
 
-![the Maglev Editor UI with a different logo, tab title and primary color.](https://1311630049-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-Me54MJUO0o8Vj5WCTWJ%2F-Meky-08rSTvfQFlN8BU%2F-MekzuL2AfyRgp1mr5nM%2Feditor-ui-custom.jpg?alt=media\&token=c604749f-8631-4f2c-82c4-f04aa152bba4)
+![the Maglev Editor UI with a different logo, tab title and primary color.](pages/personalize-the-editor-2.jpg)
 
 ## Translate theme labels (categories, section/block settings)
 

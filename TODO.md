@@ -20,7 +20,7 @@ x sticky folder name in the navbar
 x Plausible (settings.yml)
 x h1 > h2 > h3
 x basic search engine
-- script: download the images from Gitbook (+ update the script)
+x script: download the images from Gitbook (+ update the script)
 - generate a markdown file for the whole site (to be consumed by a local AI) -> create a page!!!
 - anchor link
 - github action to deploy the code

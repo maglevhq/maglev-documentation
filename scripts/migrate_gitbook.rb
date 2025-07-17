@@ -8,7 +8,13 @@ require 'optparse'
 require 'yaml'
 require 'open-uri'
 require 'nokogiri'
+require 'json'
+require 'cgi'
 require 'active_support/core_ext/string/inflections'
+require 'byebug'
+
+IMG_PREFIX = 'pages'
+IMG_DIR = './assets/images'
 
 class MarkdownExtractor
   attr_accessor :base_url
@@ -20,8 +26,9 @@ class MarkdownExtractor
   def call(path)
     content = URI.open(URI.join(base_url, path)).read
     attributes, body = extract_frontmatter_and_body(content)
+    basename = File.basename(path, '.md')
 
-    attributes['title'] ||= extract_title(body) || File.basename(path, '.html.md')
+    attributes['title'] ||= extract_title(body) || basename
 
     if description = attributes.delete('description')
       body = insert_description_block(body, description)
@@ -29,7 +36,9 @@ class MarkdownExtractor
 
     body = body.gsub("\\-", "-").gsub("&#x20;", " ")
 
-    [attributes, body]
+    images = extract_images(body, basename)
+
+    [attributes, body, images]
   end
 
   private
@@ -60,6 +69,15 @@ class MarkdownExtractor
     lines.insert(h1_idx + 1, *desc_block.map { |l| l + "\n" })
     lines.join
   end
+
+  def extract_images(body, basename)
+    body.scan(/!\[.*?\]\(.*?\)/).each_with_index.map do |match, index|
+      image_url = match.match(/!\[.*?\]\((.*?)\)/)[1]
+      locale_image_url = "#{IMG_PREFIX}/#{basename}-#{index + 1}#{File.extname(image_url).split('?').first}"
+      body.gsub!(image_url, locale_image_url)
+      [locale_image_url, image_url]
+    end
+  end
 end
 
 class DebugPageVisitor
@@ -72,11 +90,15 @@ class DebugPageVisitor
 end
 
 class ExportPageVisitor
-  attr_accessor :extractor, :output_dir
+  attr_accessor :extractor, :output_dir, :img_output_dir
 
-  def initialize(base_url, output_dir)
+  def initialize(base_url, output_dir, img_output_dir)
     @extractor = MarkdownExtractor.new(base_url)
     @output_dir = output_dir
+    @img_output_dir = img_output_dir
+
+    FileUtils.mkdir_p(output_dir)
+    FileUtils.mkdir_p(img_output_dir)
   end
 
   def visit(node)
@@ -92,11 +114,12 @@ class ExportPageVisitor
 
   def write_page(node)
     page_path = File.join(output_dir, node.markdown_path)
-    attributes, body = extractor.call(node.server_markdown_path)
+    attributes, body, images = extractor.call(node.server_markdown_path)
     attributes['order'] = node.order
     content = "#{attributes.to_yaml.strip}\n---\n\n#{body.strip}\n"
     File.write(page_path, content)
     puts "Created: #{page_path} -> #{node.href}"
+    write_images(images)
   end
 
   def write_folder_index(node)
@@ -111,6 +134,43 @@ class ExportPageVisitor
     YAML
     File.write(index_path, content)
     puts "Created: #{index_path} -> #{node.first_child_href}"
+  end
+
+  # def write_images(images)
+  #   images.each do |locale_image_url, image_url|
+  #     image_path = File.join(img_output_dir, locale_image_url)
+  #     pp image_url
+  #     image_content = URI.open(image_url).read
+  #     raise 'tODO'
+  #     File.write(image_path, image_content)
+  #     puts "\tDownloaded: #{image_url} -> #{image_path}"
+  #   end
+  # end
+  def write_images(images)
+    images.each do |locale_image_url, image_url|
+      image_path = File.join(img_output_dir, locale_image_url)
+      image_content = nil
+
+      URI.open(image_url) do |f|
+        if f.content_type.start_with?('image/')
+          image_content = f.read
+        elsif f.content_type == 'application/json'
+          json = JSON.parse(f.read)
+          if json['bucket'] && json['name'] && json['downloadTokens']
+            encoded_name = CGI.escape(json['name'])
+            direct_url = "https://firebasestorage.googleapis.com/v0/b/#{json['bucket']}/o/#{encoded_name}?alt=media&token=#{json['downloadTokens']}"
+            image_content = URI.open(direct_url).read
+          else
+            raise "Unexpected JSON structure for image: #{image_url}"
+          end
+        else
+          raise "Unknown content type: #{f.content_type} for #{image_url}"
+        end
+      end
+
+      File.write(image_path, image_content)
+      puts "\tDownloaded: #{image_url} -> #{image_path}"
+    end
   end
 end
 
@@ -204,7 +264,7 @@ end.parse!
 if options[:input] && options[:output]
   root = crawl_and_build_tree(options[:input])
   # DebugPageVisitor.new.visit(root)
-  ExportPageVisitor.new(options[:input], options[:output]).visit(root)
+  ExportPageVisitor.new(options[:input], options[:output], IMG_DIR).visit(root)
 else
   puts "Usage: ruby scripts/migrate_gitbook.rb -i https://docs.maglev.dev/ -o ./pages"
 end

@@ -50,7 +50,7 @@ Once the different files of the section have been generated, it's time to comple
 
 Start by visiting the [admin url](http://localhost:3000/maglev/admin/theme) once you've started your Rails server and click to the title of your newly generated section. You will see a screen like this one.
 
-![Maglev admin page](https://1311630049-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-Me54MJUO0o8Vj5WCTWJ%2F-MgfTUQsayPcc00o3-2T%2F-MgfUAh4wJk8iZsZNHV1%2FScreen%20Shot%202021-08-09%20at%205.15.29%20PM.png?alt=media\&token=47897669-8a99-4741-8609-690d409be854)
+![Maglev admin page](pages/create-a-new-section-1.png)
 
 There are 3 different buttons on this screen:
 

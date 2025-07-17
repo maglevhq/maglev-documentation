@@ -29,7 +29,7 @@ Maglev requires at least 2 pieces of information for each collection:
 
 In order to display the list of choices in the CollectionItem component, Maglev needs a **label** and/or an **image** (optional) for each item.
 
-![An editor selecting a product](https://1311630049-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-Me54MJUO0o8Vj5WCTWJ%2F-MhojRC27bDGhRCUzhDL%2F-MhokhmvoCILFS041o7A%2FScreen%20Shot%202021-08-23%20at%2010.45.10%20PM.png?alt=media\&token=46588c01-0fe8-4111-9f87-feba5af74e63)
+![An editor selecting a product](pages/setup-collections-1.png)
 
 {% code title="config/initializer/maglev.rb" %}
 ```ruby
