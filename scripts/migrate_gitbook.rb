@@ -203,7 +203,7 @@ end.parse!
 
 if options[:input] && options[:output]
   root = crawl_and_build_tree(options[:input])
-  DebugPageVisitor.new.visit(root)
+  # DebugPageVisitor.new.visit(root)
   ExportPageVisitor.new(options[:input], options[:output]).visit(root)
 else
   puts "Usage: ruby scripts/migrate_gitbook.rb -i https://docs.maglev.dev/ -o ./pages"

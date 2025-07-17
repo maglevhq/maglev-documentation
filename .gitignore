@@ -6,6 +6,7 @@ build
 .rspec_status
 node_modules/
 assets/javascripts/site.js
+assets/javascripts/search-index.json
 assets/stylesheets/site.css
 docs/
 components/pro

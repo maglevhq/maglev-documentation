@@ -19,13 +19,10 @@ x favicon
 x sticky folder name in the navbar
 x Plausible (settings.yml)
 x h1 > h2 > h3
+x basic search engine
+- script: download the images from Gitbook (+ update the script)
 - generate a markdown file for the whole site (to be consumed by a local AI) -> create a page!!!
 - anchor link
-- basic search engine
-  - create a Algolia account
-  - rake task to re-build an index based on the Markdown files
-  - install instantsearch.js
-  - pimp the UI
 - github action to deploy the code
 
 ? next/previous page
