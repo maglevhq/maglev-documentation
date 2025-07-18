@@ -29,7 +29,7 @@ x first deployment:
   x github action to deploy the code
 x 404 error page
 x suggest edits
-- next page
+x next page
 
 ? next/previous page
 ? run AI to fix English sentences

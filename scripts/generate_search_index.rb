@@ -23,6 +23,11 @@ def remove_markdown_images(markdown)
   markdown.gsub(/!\[.*?\]\(.*?\)/, '')
 end
 
+# Remove frontmatter block (YAML between --- at the top) from markdown
+def remove_frontmatter(markdown)
+  markdown.sub(/\A---\s*\n.*?\n---\s*\n/m, '')
+end
+
 # Extracts title, h2, h3 from markdown text
 def extract_markdown_content(file_path)
   lines = File.readlines(file_path)
@@ -39,6 +44,7 @@ def extract_markdown_content(file_path)
   end
   title ||= File.basename(file_path, '.*').capitalize
   markdown_content = lines.join
+  markdown_content = remove_frontmatter(markdown_content)
   markdown_content = remove_liquid_tags(markdown_content)
   markdown_content = remove_markdown_images(markdown_content)
   html_content = $markdown.render(markdown_content)
