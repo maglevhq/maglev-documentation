@@ -1,4 +1,6 @@
 class AppLayoutComponent < ViewComponent::Base
+  include SettingsHelper
+
   attr_reader :site, :current_page
 
   renders_many :topbar_links, 'AppLayout::TopbarLinkComponent'
@@ -6,6 +8,14 @@ class AppLayoutComponent < ViewComponent::Base
   def initialize(site:, current_page:)
     @site = site
     @current_page = current_page
+  end
+
+  def github_repo_url
+    "https://github.com/#{settings.site['github_repo']}/blob/main/#{current_page.asset.path}"
+  end
+
+  def edit_page?
+    current_page.data['sidebar'] != false
   end
 
   def pages

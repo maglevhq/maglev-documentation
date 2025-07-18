@@ -4,6 +4,7 @@
 # Site Information
 site:
   title: "Maglev Documentation"
+  github_repo: "maglevhq/maglev-documentation"
 
 appearance:
   theme: "light"
