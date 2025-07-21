@@ -89,6 +89,10 @@ Before running any of the section management commands below, we strongly recomme
 
 ### Reset Section Content
 
+{% hint style="info" %}
+**Available since Maglev 2.1**
+{% endhint %}
+
 Resets the content of all sections of a specific type across your site and pages.
 
 ```bash
