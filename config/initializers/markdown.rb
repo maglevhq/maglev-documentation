@@ -58,7 +58,7 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
 
     <<-HTML
       <h#{header_level} id="#{id}" class="scroll-mt-20 relative group/hash flex items-center">
-        <div class="-ml-8 pr-2 relative group-hover/hash:opacity-100 opacity-0 transition-opacity">
+        <div class="absolute top-0 -left-8 w-8 group-hover/hash:opacity-100 opacity-0 transition-opacity">
           <a href="##{id}" class="text-gray-400 group-hover/hash:text-gray-600 transition-colors">
             <i class="fa-solid fa-hashtag"></i>
           </a>
