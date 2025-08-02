@@ -17,10 +17,10 @@ Add this line to your application's Gemfile:
 
 ```bash
 source "https://<your license key>@packages.nocoffee.fr/private" do
-  gem "maglevcms-pro", require: 'maglev/pro'
+  gem "maglevcms-pro", '~> 1.0.0', require: 'maglev/pro'
 end
 
-gem 'maglevcms', '~> 1.7.3', require: false
+gem 'maglevcms', '~> 2.0.0', require: false
 ```
 
 **Note:** the license key is the one you got from the email you receive after the purchase. If you deleted the email, no worries, send us an email at [contact@maglev.dev](mailto:contact@maglev.dev).
