@@ -92,7 +92,7 @@ Now, install the theme and assign an id to it (`default` in our example):
 bundle exec rails g maglev:hyperui:install --theme=default
 ```
 
-### Create programmatically your first site
+## Create programmatically your first site
 
 We'll assume that you want to offer a site for each instance of the **Account** model in your application. Remember that you have made the choice of the parent model during the installation.
 
@@ -112,11 +112,16 @@ And type the following lines of Ruby code
 
 ```ruby
 my_account = Account.first
-site = Maglev::Pro::GenerateSite.call(siteable: my_account, theme_id: 'simple', name: 'My first site', locales: [{ label: 'English', prefix: 'en' }])
+site = my_account.generate_maglev_site(theme: 'simple')
 ```
 
 {% hint style="info" %}
-In the next steps, inside your Rails application, you'll have to call the **Maglev::Pro::GenerateSite** service from one of your controller action, a model callback or your own service.
+The `generate_maglev_site` method from the Account model is included in the `app/models/concerns/maglev_site_concern.rb` concern.
+
+Please review the concern and customize it according to your application's specific needs for creating Maglev sites.
+{% endhint %} &nbsp;
+{% hint style="warning" %}
+You'll need to call `.generate_maglev_site` somewhere in your main Rails application (like in a controller action, model callback, rake task or service) to actually create the Maglev site.
 {% endhint %}
 
 In order to get the editor UI url, in the Rails console, type:
