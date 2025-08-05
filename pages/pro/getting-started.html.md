@@ -17,7 +17,7 @@ Add this line to your application's Gemfile:
 
 ```bash
 source "https://<your license key>@packages.nocoffee.fr/private" do
-  gem "maglevcms-pro", '~> 1.0.0', require: 'maglev/pro'
+  gem "maglevcms-pro", '~> 1.0.2', require: 'maglev/pro'
 end
 
 gem 'maglevcms', '~> 2.0.0', require: false
