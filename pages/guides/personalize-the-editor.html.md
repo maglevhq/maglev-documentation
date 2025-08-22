@@ -74,6 +74,10 @@ In your RoR application, add your translations in your locale files (config/loca
           [section_name]:
             settings:
               [setting_id]: "Translated Label"
+            blocks:
+              label: "Translated blocks tab label"
+              types:
+                [block_type]: "Translated block type name"
 ```
 
 ### Example
@@ -94,4 +98,20 @@ en:
               title: "Title 😎"
 ```
 
-The system will automatically pick up these translations in the editor interface when displaying setting labels. If no translation is found, it will fall back to the `label` value defined in the section's YAML file.
+You can also translate block labels and block types. For example, to translate the blocks tab label and block types for a "navbar" section:
+
+```yaml
+en:
+  maglev:
+    themes:
+      simple:
+        sections:
+          navbar:
+            blocks:
+              label: "Menu 🍔"
+              types:
+                menu_item: "Menu item 👩🏽‍🍳"
+                alt_menu_item: "Alt Menu item 🍪"
+```
+
+The system will automatically pick up these translations in the editor interface when displaying setting labels, block labels, and block type names. If no translation is found, it will fall back to the `label` value defined in the section's YAML file.
