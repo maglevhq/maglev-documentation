@@ -5,7 +5,7 @@ order: 6
 
 # Build a menu section
 
-In most cases, your site will need to display a menu / navbar to show the pages available to the visitors. A section like this one for instance. 
+In most cases, your site will need to display a menu / navbar to show the pages available to the visitors. A section like this one for instance.
 
 TODO: show an image hero + navbar
 
@@ -22,7 +22,7 @@ block:navbar_item:link:link
 
 ```
 
-In other words, we just told Maglev to generate a section named navbar\_01 which will have a logo and a list of navbar items. 
+In other words, we just told Maglev to generate a section named navbar\_01 which will have a logo and a list of navbar items.
 
 {% hint style="info" %}
 Make sure you added the `navbars` category in your `theme.yml` file.
@@ -53,7 +53,7 @@ Next, we want the link for navbar item to have a text that will be modified by t
 # Name of the section displayed in the editor UI
 name: "Navbar 01"
 ...
-blocks: 
+blocks:
 - name: "Navbar item"
   type: navbar_item
   settings:
@@ -77,36 +77,36 @@ name: "Navbar 01"
 sample:
   settings:
     logo: "/theme/image-placeholder.jpg"
-  blocks: 
+  blocks:
   - type: navbar_item
     settings:
-      link: 
+      link:
         text: "Home"
         link_type: "url"
         href: "#"
   - type: navbar_item
     settings:
-      link: 
+      link:
         text: "About us"
         link_type: "url"
         href: "#"
   - type: navbar_item
     settings:
-      link: 
+      link:
         text: "Our products"
         link_type: "url"
         href: "#"
-          
+
 
 ```
 {% endcode %}
 
 ### Write the template
 
-We'll rely on Tailwindcss to style our navbar but we can use any Html/CSS library.
+We'll rely on Tailwindcss to style our navbar but we can use any HTML/CSS library.
 
 {% code title="app/views/theme/sections/navbar_01.html.erb" %}
-```markup
+```erb
 <%= maglev_section.wrapper_tag.div class: 'py-6 md:py-12 px-4 md:px-6' do %>
   <div class="container mx-auto">
     <div class="flex items-center">
@@ -129,7 +129,43 @@ We'll rely on Tailwindcss to style our navbar but we can use any Html/CSS librar
 ```
 {% endcode %}
 
-TODO: how to highlight an active menu item
+## Highlighting Active Menu Items
+
+To highlight the currently active menu item, you can use the `active?` method available on link settings. This method returns `true` when the link points to the current page (for page-type links).
+
+Here's how to implement active menu highlighting:
+
+{% code title="app/views/theme/sections/navbar_01.html.erb" %}
+```erb
+<%= maglev_section.wrapper_tag.div class: 'py-6 md:py-12 px-4 md:px-6' do %>
+  <div class="container mx-auto">
+    <div class="flex items-center">
+      <div class="relative w-32">
+        <%= maglev_section.setting_tag :logo %>
+      </div>
+
+      <nav class="ml-auto">
+        <ul class="flex items-center">
+          <% section.blocks.each do |maglev_block| %>
+            <%# Determine active state and apply appropriate classes %>
+            <% is_active = maglev_block.settings.link.active? %>
+            <%= maglev_block.wrapper_tag.li class: class_names("ml-8", { "text-blue-600 font-semibold": is_active }) do %>
+              <%= maglev_block.setting_tag :link, class: class_names("hover:underline", { "text-blue-600": is_active }) %>
+            <% end %>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+<% end %>
+```
+{% endcode %}
+
+**Key points:**
+- The `active?` method works for links with `link_type: "page"`
+- It automatically compares the current page ID with the link's target page
+- You can use this to apply different CSS classes, styles, or content for active items
+- For external URLs or other link types, `active?` will always return `false`
 
 {% hint style="info" %}
 Go to the[ Create a new section](https://docs.maglev.dev/guides/create-a-new-section) documentation page to know how to test and use your section in the editor UI.
@@ -156,7 +192,7 @@ blocks_presentation: "tree"
 Next, in the section template, we need to display the children of a navbar items.
 
 {% code title="app/views/theme/sections/navbar_01.html.erb" %}
-```markup
+```erb
 <%= maglev_section.wrapper_tag.div class: 'py-6 md:py-12 px-4 md:px-6' do %>
   <div class="container mx-auto">
     <div class="flex items-center">
@@ -202,29 +238,29 @@ name: "Navbar 01"
 sample:
   settings:
     logo: "/theme/image-placeholder.jpg"
-  blocks: 
+  blocks:
   - type: navbar_item
     settings:
-      link: 
+      link:
         text: "Home"
         link_type: "url"
         href: "#"
   - type: navbar_item
     settings:
-      link: 
+      link:
         text: "About us"
         link_type: "url"
         href: "#"
     children:
     - type: navbar_item
       settings:
-        link: 
+        link:
           text: "The company"
           link_type: "url"
           href: "#"
     - type: navbar_item
       settings:
-        link: 
+        link:
           text: "Our team"
           link_type: "url"
           href: "#"

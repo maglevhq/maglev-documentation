@@ -94,7 +94,7 @@ settings:
 
 {% tab title="Raw template" %}
 ```markup
-<img 
+<img
     <%= section.settings.screenshot.dom_data %>
     src="<%= section.settings.screenshot %>"
     alt="<%= section.settings.screenshot.alt_text %>"
@@ -104,7 +104,7 @@ settings:
 {% endtab %}
 {% endtabs %}
 
-**List of properties:** 
+**List of properties:**
 
 ```markup
 <p><img src="<%= maglev_section.settings.screenshot.url %>" alt="<%= maglev_section.settings.screenshot.alt_text %>" /></p>
@@ -160,8 +160,8 @@ settings:
 
 {% tab title="Raw template (without text)" %}
 ```markup
-<a 
-  href="<%= section.settings.cta_link.href %>" 
+<a
+  href="<%= section.settings.cta_link.href %>"
   <% if section.settings.cta_link.open_new_window? %>target="_blank"<% end %>
 >
   Call us
@@ -172,8 +172,6 @@ settings:
 
 **List of properties:**
 
-
-
 | **Property**       | Type    | Description                                                                           |
 | ------------------ | ------- | ------------------------------------------------------------------------------------- |
 | href               | String  | URL of the page / external URL / email address.                                       |
@@ -181,6 +179,10 @@ settings:
 | open\_new\_window? | Boolean | True if the content editor wants the link to be opened in a new browser tab.          |
 | target\_blank      | String  | Returns `_blank` or nil depending on the property above.                              |
 | to\_s              | String  | Alias of the `href` property.                                                         |
+| with\_text?        | Boolean | True if the setting has the `with_text` option enabled.                               |
+| active?            | Boolean | True if the link is active (when `link_type` is 'page' and matches current page).     |
+| link_type          | String  | Type of link: 'url', 'page', or other custom types.                                   |
+| link_id            | String  | ID of the linked page (when `link_type` is 'page').                                   |
 
 ### collection\_item
 
@@ -235,7 +237,7 @@ settings:
 If the content editor hasn't chosen an item or if the item doesn't exist anymore, the setting tag won't rendered.
 {% endhint %}
 
-**List of properties:** 
+**List of properties:**
 
 | Property | Type    | Description                               |
 | -------- | ------- | ----------------------------------------- |

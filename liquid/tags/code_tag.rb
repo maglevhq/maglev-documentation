@@ -30,7 +30,7 @@ class Liquid::Tags::CodeTag < Liquid::Block
 
     content.gsub("<code",
       <<~HTML
-      <p class="not-prose text-sm mb-2 font-medium text-gray-500 dark:text-gray-400">#{title}</p><code
+      <p class="not-prose text-sm mb-2 font-medium text-gray-500 dark:text-gray-400">#{title}</p><code class="block overflow-x-auto w-full"
       HTML
       .strip
     )
