@@ -372,6 +372,7 @@ settings:
 #### Advanced examples:
 
 **Simple select with basic options:**
+
 ```yaml
 settings:
 - label: "Menu style"
@@ -386,6 +387,7 @@ settings:
 ```
 
 **Multi-language select with translated labels:**
+
 ```yaml
 settings:
 - label: "Language variant"
@@ -404,6 +406,7 @@ settings:
 ```
 
 **Multi-language select with translated values:**
+
 ```yaml
 settings:
 - label: "Localized option"
