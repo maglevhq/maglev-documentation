@@ -369,6 +369,62 @@ settings:
 ```
 {% endcode %}
 
+#### Advanced examples:
+
+**Simple select with basic options:**
+```yaml
+settings:
+- label: "Menu style"
+  id: menu_style
+  type: select
+  select_options:
+  - label: "Option 1"
+    value: "option1"
+  - label: "Option 2"
+    value: "option2"
+  default: "option1"
+```
+
+**Multi-language select with translated labels:**
+```yaml
+settings:
+- label: "Language variant"
+  id: language_variant
+  type: select
+  select_options:
+  - label:
+      en: "Option 1"
+      fr: "Option 1 [FR]"
+    value: "option1"
+  - label:
+      en: "Option 2"
+      fr: "Option 2 [FR]"
+    value: "option2"
+  default: "option1"
+```
+
+**Multi-language select with translated values:**
+```yaml
+settings:
+- label: "Localized option"
+  id: localized_option
+  type: select
+  select_options:
+  - label:
+      en: "Option 1"
+      fr: "Option 1 [FR]"
+    value:
+      en: "option1"
+      fr: "option1-fr"
+  - label:
+      en: "Option 2"
+      fr: "Option 2 [FR]"
+    value:
+      en: "option2"
+      fr: "option2-fr"
+  default: "option1"
+```
+
 #### Usage in the HTML/ERB template:
 
 ```erb

@@ -115,3 +115,66 @@ en:
 ```
 
 The system will automatically pick up these translations in the editor interface when displaying setting labels, block labels, and block type names. If no translation is found, it will fall back to the `label` value defined in the section's YAML file.
+
+## Select setting type examples
+
+The `select` setting type is particularly useful for providing content editors with predefined choices. Here are some practical examples of how to implement it:
+
+### Basic select with options
+
+```yaml
+settings:
+- label: "Menu style"
+  id: menu_style
+  type: select
+  select_options:
+  - label: "Option 1"
+    value: "option1"
+  - label: "Option 2"
+    value: "option2"
+  default: "option1"
+```
+
+### Multi-language select with translated labels
+
+```yaml
+settings:
+- label: "Language variant"
+  id: language_variant
+  type: select
+  select_options:
+  - label:
+      en: "Option 1"
+      fr: "Option 1 [FR]"
+    value: "option1"
+  - label:
+      en: "Option 2"
+      fr: "Option 2 [FR]"
+    value: "option2"
+  default: "option1"
+```
+
+### Multi-language select with translated values
+
+```yaml
+settings:
+- label: "Localized option"
+  id: localized_option
+  type: select
+  select_options:
+  - label:
+      en: "Option 1"
+      fr: "Option 1 [FR]"
+    value:
+      en: "option1"
+      fr: "option1-fr"
+  - label:
+      en: "Option 2"
+      fr: "Option 2 [FR]"
+    value:
+      en: "option2"
+      fr: "option2-fr"
+  default: "option1"
+```
+
+These examples show how the select setting type can be used to create user-friendly dropdown menus in the editor interface, with support for both simple options and multi-language scenarios.
