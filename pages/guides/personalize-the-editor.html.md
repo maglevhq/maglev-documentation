@@ -74,6 +74,8 @@ In your RoR application, add your translations in your locale files (config/loca
           [section_name]:
             settings:
               [setting_id]: "Translated Label"
+              [setting_id]_options:
+                [option_value]: "Translated Option Value"
             blocks:
               label: "Translated blocks tab label"
               types:
@@ -135,46 +137,39 @@ settings:
   default: "option1"
 ```
 
-### Multi-language select with translated labels
+### Localizing select options
+
+For multi-language support, use the translation files with the `{setting_id}_options` structure. Given this select setting:
 
 ```yaml
 settings:
-- label: "Language variant"
-  id: language_variant
+- label: "Alignment"
+  id: alignment
   type: select
   select_options:
-  - label:
-      en: "Option 1"
-      fr: "Option 1 [FR]"
-    value: "option1"
-  - label:
-      en: "Option 2"
-      fr: "Option 2 [FR]"
-    value: "option2"
-  default: "option1"
+  - label: "Left"
+    value: left
+  - label: "Center"
+    value: center
+  - label: "Right"
+    value: right
 ```
 
-### Multi-language select with translated values
+You can translate it like this:
 
 ```yaml
-settings:
-- label: "Localized option"
-  id: localized_option
-  type: select
-  select_options:
-  - label:
-      en: "Option 1"
-      fr: "Option 1 [FR]"
-    value:
-      en: "option1"
-      fr: "option1-fr"
-  - label:
-      en: "Option 2"
-      fr: "Option 2 [FR]"
-    value:
-      en: "option2"
-      fr: "option2-fr"
-  default: "option1"
+en:
+  maglev:
+    themes:
+      simple:
+        sections:
+          jumbotron:
+            settings:
+              alignment: "Alignment 📏"
+              alignment_options:
+                left: "Left 🍪"
+                center: "Center 👩🏽‍🍳"
+                right: "Right 🍔"
 ```
 
-These examples show how the select setting type can be used to create user-friendly dropdown menus in the editor interface, with support for both simple options and multi-language scenarios.
+These examples show how the select setting type can be used to create user-friendly dropdown menus in the editor interface, with proper localization support through translation files.

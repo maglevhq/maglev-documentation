@@ -386,47 +386,9 @@ settings:
   default: "option1"
 ```
 
-**Multi-language select with translated labels:**
-
-```yaml
-settings:
-- label: "Language variant"
-  id: language_variant
-  type: select
-  select_options:
-  - label:
-      en: "Option 1"
-      fr: "Option 1 [FR]"
-    value: "option1"
-  - label:
-      en: "Option 2"
-      fr: "Option 2 [FR]"
-    value: "option2"
-  default: "option1"
-```
-
-**Multi-language select with translated values:**
-
-```yaml
-settings:
-- label: "Localized option"
-  id: localized_option
-  type: select
-  select_options:
-  - label:
-      en: "Option 1"
-      fr: "Option 1 [FR]"
-    value:
-      en: "option1"
-      fr: "option1-fr"
-  - label:
-      en: "Option 2"
-      fr: "Option 2 [FR]"
-    value:
-      en: "option2"
-      fr: "option2-fr"
-  default: "option1"
-```
+{% hint style="info" %}
+**Localization**: For multi-language support, use the translation files as described in the [Translating select options](#translating-select-options) section below.
+{% endhint %}
 
 #### Usage in the HTML/ERB template:
 
@@ -479,8 +441,6 @@ settings:
 
 ## Translating setting labels
 
-
-
 While the `label` property defines the default text displayed in the editor UI, you can translate these labels by adding translations to your main application's locale files. The translations follow a specific naming convention under the `maglev.themes` namespace.
 
 ### Translation structure
@@ -514,3 +474,57 @@ en:
 ```
 
 The system will automatically use these translations in the editor interface when displaying setting labels. If no translation is found, it will fall back to the `label` value defined in the section's YAML file.
+
+### Translating select options
+
+For `select` type settings, you can translate both the setting label and the individual option labels. The option translations use a specific structure where all options for a setting are grouped under `{setting_id}_options`:
+
+```yaml
+en:
+  maglev:
+    themes:
+      [theme_name]:
+        sections:
+          [section_name]:
+            settings:
+              [setting_id]: "Translated Setting Label"
+              [setting_id]_options:
+                [option_value]: "Translated Option Label"
+```
+
+### Select translation example
+
+Given this select setting definition:
+
+```yaml
+settings:
+- label: "Alignment"
+  id: alignment
+  type: select
+  select_options:
+  - label: "Left"
+    value: left
+  - label: "Center"
+    value: center
+  - label: "Right"
+    value: right
+```
+
+You can translate it like this:
+
+```yaml
+en:
+  maglev:
+    themes:
+      simple:
+        sections:
+          jumbotron:
+            settings:
+              alignment: "Alignment 📏"
+              alignment_options:
+                left: "Left 🍪"
+                center: "Center 👩🏽‍🍳"
+                right: "Right 🍔"
+```
+
+The system will automatically use these translations in the editor interface when displaying both the setting label and the option labels. If no translation is found, it will fall back to the `label` values defined in the section's YAML file.
