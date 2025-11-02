@@ -66,7 +66,7 @@ Add now the Maglev engine to your app Gemfile file.
 
 {% code title="Gemfile" %}
 ```ruby
-gem 'maglevcms', '~> 2.0.0'
+gem 'maglevcms', '~> 2.1.0'
 gem 'maglevcms-hyperui-kit', '~> 1.2.0'
 ```
 {% endcode %}
