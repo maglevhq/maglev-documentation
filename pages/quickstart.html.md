@@ -25,7 +25,7 @@ We wrote a Rails application template which will generate a brand new **Ruby on 
 
 ```bash
 $ rails new my-awesome-site \
-  -m https://raw.githubusercontent.com/maglevhq/maglev-core/master/template.rb \
+  -m https://raw.githubusercontent.com/maglevhq/maglev-core/v2.1.0/template.rb \
   --skip-action-cable
 
 $ cd my-awesome-site
