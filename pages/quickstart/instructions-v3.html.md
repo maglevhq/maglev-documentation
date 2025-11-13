@@ -1,22 +1,20 @@
 ---
-title: Quick start
+title: Version 3 [BETA]
 order: 2
 ---
-
-# Quick start
+# Version 3 [BETA]
 
 {% description %}
-Instructions to install the single-site version (or MIT version) of Maglev
+Instructions to install the single-site version (or MIT version) of Maglev v3 [BETA]
 {% enddescription %}
 
 
 {% hint style="info" %}
 **Requirements**:\
 - Ruby 3+\
-- Ruby on Rails 7+\
-- Postgresql or SQLite\
+- Ruby on Rails 7.2+\
+- Postgresql, SQLite, MySQL or MariaDB\
 - ImageMagick or libvips\
-- Node 20+
 {% endhint %}
 
 ## Short version (1 minute installation) 😎
@@ -25,7 +23,7 @@ We wrote a Rails application template which will generate a brand new **Ruby on 
 
 ```bash
 $ rails new my-awesome-site \
-  -m https://raw.githubusercontent.com/maglevhq/maglev-core/v2.1.0/template.rb \
+  -m https://raw.githubusercontent.com/maglevhq/maglev-core/master/template.rb \
   --skip-action-cable
 
 $ cd my-awesome-site
@@ -66,8 +64,8 @@ Add now the Maglev engine to your app Gemfile file.
 
 {% code title="Gemfile" %}
 ```ruby
-gem 'maglevcms', '~> 2.1.0'
-gem 'maglevcms-hyperui-kit', '~> 1.2.0'
+gem 'maglevcms', '~> 3.0.0.beta2'
+gem 'maglevcms-hyperui-kit', '~> 1.3.0'
 ```
 {% endcode %}
 
