@@ -2,37 +2,76 @@ name: Publish website
 
 on:
   push:
-    branches: main
+    branches:
+      - main
+      - v2
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '24'
-    - name: Install yarn
-      run: npm install -g yarn
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: "3.4"
-        bundler-cache: true
-    - name: Install dependencies
-      run: |
-        bundle install
-        yarn install
-    - name: Install AWS CLI
-      uses: unfor19/install-aws-cli-action@v1
-    - name: Build and publish website
-      run: bundle exec rake
-      env:
-          AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
-          BUNNYCDN_ACCESS_KEY: ${{ secrets.BUNNYCDN_ACCESS_KEY }}
-          BUNNYCDN_ZONE_ID: ${{ secrets.BUNNYCDN_ZONE_ID }}
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+      - name: Install dependencies
+        run: |
+          bundle install
+          yarn install
+
+      - name: Select deployment target (main)
+        if: github.ref_name == 'main'
+        env:
+          BUNNY_STORAGE_ZONE_ID: ${{ secrets.BUNNY_STORAGE_ZONE_ID }}
+          BUNNY_STORAGE_ZONE_PASSWORD: ${{ secrets.BUNNY_STORAGE_ZONE_PASSWORD }}
+          BUNNY_ACCESS_KEY: ${{ secrets.BUNNY_ACCESS_KEY }}
+          BUNNY_ZONE_ID: ${{ secrets.BUNNY_ZONE_ID }}
           SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+
+        run: |
+          echo "BUNNY_STORAGE_ZONE_ID=$BUNNY_STORAGE_ZONE_ID" >> "$GITHUB_ENV"
+          echo "BUNNY_STORAGE_ZONE_PASSWORD=$BUNNY_STORAGE_ZONE_PASSWORD" >> "$GITHUB_ENV"
+          echo "BUNNY_ACCESS_KEY=$BUNNY_ACCESS_KEY" >> "$GITHUB_ENV"
+          echo "SITE_BASE_URL=$SITE_BASE_URL" >> "$GITHUB_ENV"
+          echo "BUNNY_ZONE_ID=$BUNNY_ZONE_ID" >> "$GITHUB_ENV"
+
+      - name: Select deployment target (v2)
+        if: github.ref_name == 'v2'
+        env:
+          BUNNY_STORAGE_ZONE_ID: ${{ secrets.BUNNY_STORAGE_ZONE_ID }}
+          BUNNY_STORAGE_ZONE_PASSWORD: ${{ secrets.BUNNY_STORAGE_ZONE_PASSWORD }}
+          BUNNY_ACCESS_KEY: ${{ secrets.BUNNY_ACCESS_KEY }}
+          BUNNY_ZONE_ID: ${{ secrets.BUNNY_ZONE_ID_V2 }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL_V2 }}
+
+        run: |
+          echo "BUNNY_STORAGE_ZONE_ID=$BUNNY_STORAGE_ZONE_ID" >> "$GITHUB_ENV"
+          echo "BUNNY_STORAGE_ZONE_PASSWORD=$BUNNY_STORAGE_ZONE_PASSWORD" >> "$GITHUB_ENV"
+          echo "BUNNY_ACCESS_KEY=$BUNNY_ACCESS_KEY" >> "$GITHUB_ENV"
+          echo "SITE_BASE_URL=$SITE_BASE_URL" >> "$GITHUB_ENV"
+          echo "BUNNY_ZONE_ID=$BUNNY_ZONE_ID" >> "$GITHUB_ENV"
+
+      - name: Build website
+        run: bundle exec rake clean compile
+        env:
+          SITE_BASE_URL: ${{ env.SITE_BASE_URL }}
+
+      - name: Deploy build to Bunny Storage API
+        run: bundle exec ruby ./scripts/upload_to_bunny_storage.rb ./build
+        env:
+          BUNNY_STORAGE_ZONE_ID: ${{ env.BUNNY_STORAGE_ZONE_ID }}
+          BUNNY_STORAGE_ZONE_PASSWORD: ${{ env.BUNNY_STORAGE_ZONE_PASSWORD }}
+
+      - name: Purge Bunny cache
+        run: bundle exec rake purge_cache
+        env:
+          BUNNY_ACCESS_KEY: ${{ env.BUNNY_ACCESS_KEY }}
+          BUNNY_ZONE_ID: ${{ env.BUNNY_ZONE_ID }}

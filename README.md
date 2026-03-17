@@ -46,9 +46,11 @@ gem install foreman
 ```
 
 2. **Start the development server:**
+
    ```sh
    foreman start -f Procfile.dev
    ```
+
    Then open [http://127.0.0.1:8080](http://127.0.0.1:8080) to view the docs locally.
 
 3. **Edit or add documentation:**
@@ -68,6 +70,38 @@ gem install foreman
 - Use components for reusable UI.
 - Use Stimulus controllers for JavaScript interactions.
 - Prefer Tailwind CSS classes for styling.
+
+## Deployment
+
+The `publish` GitHub Action deploys static files to Bunny Storage via the HTTP Storage API using:
+
+- `scripts/upload_to_bunny_storage.rb`
+
+- `main` branch -> production docs target
+- `v2` branch -> v2 docs target
+
+Required GitHub secrets:
+
+- Production (`main`):
+  - `BUNNY_STORAGE_ZONE_ID` (Storage zone identifier for upload)
+  - `BUNNY_STORAGE_ZONE_PASSWORD` (Storage zone password used for uploads)
+  - `BUNNY_ACCESS_KEY` (Bunny account API key used for pull-zone cache purge)
+  - `SITE_BASE_URL`
+  - `BUNNY_ZONE_ID` (Pull zone id for cache purge)
+- V2 (`v2`):
+  - `BUNNY_STORAGE_ZONE_ID` (or set this in workflow to any v2-specific secret)
+  - `BUNNY_STORAGE_ZONE_PASSWORD` (or set this in workflow to any v2-specific secret)
+  - `BUNNY_ACCESS_KEY` (or set this in workflow to any v2-specific secret)
+  - `SITE_BASE_URL_V2`
+  - `BUNNY_ZONE_ID_V2`
+
+Local upload command (same script as CI):
+
+```bash
+BUNNY_STORAGE_ZONE_ID=... \
+BUNNY_STORAGE_ZONE_PASSWORD=... \
+bundle exec ruby ./scripts/upload_to_bunny_storage.rb ./build
+```
 
 ## More Information
 
