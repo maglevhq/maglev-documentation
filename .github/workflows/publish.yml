@@ -46,8 +46,8 @@ jobs:
       - name: Select deployment target (v2)
         if: github.ref_name == 'v2'
         env:
-          BUNNY_STORAGE_ZONE_ID: ${{ secrets.BUNNY_STORAGE_ZONE_ID }}
-          BUNNY_STORAGE_ZONE_PASSWORD: ${{ secrets.BUNNY_STORAGE_ZONE_PASSWORD }}
+          BUNNY_STORAGE_ZONE_NAME: ${{ secrets.BUNNY_STORAGE_ZONE_NAME_V2 }}
+          BUNNY_STORAGE_ZONE_PASSWORD: ${{ secrets.BUNNY_STORAGE_ZONE_PASSWORD_V2 }}
           BUNNY_ACCESS_KEY: ${{ secrets.BUNNY_ACCESS_KEY }}
           BUNNY_ZONE_ID: ${{ secrets.BUNNY_ZONE_ID_V2 }}
           SITE_BASE_URL: ${{ secrets.SITE_BASE_URL_V2 }}
