@@ -83,13 +83,13 @@ The `publish` GitHub Action deploys static files to Bunny Storage via the HTTP S
 Required GitHub secrets:
 
 - Production (`main`):
-  - `BUNNY_STORAGE_ZONE_ID` (Storage zone identifier for upload)
+  - `BUNNY_STORAGE_ZONE_NAME` (Storage zone name for upload)
   - `BUNNY_STORAGE_ZONE_PASSWORD` (Storage zone password used for uploads)
   - `BUNNY_ACCESS_KEY` (Bunny account API key used for pull-zone cache purge)
   - `SITE_BASE_URL`
   - `BUNNY_ZONE_ID` (Pull zone id for cache purge)
 - V2 (`v2`):
-  - `BUNNY_STORAGE_ZONE_ID` (or set this in workflow to any v2-specific secret)
+  - `BUNNY_STORAGE_ZONE_NAME` (or set this in workflow to any v2-specific secret)
   - `BUNNY_STORAGE_ZONE_PASSWORD` (or set this in workflow to any v2-specific secret)
   - `BUNNY_ACCESS_KEY` (or set this in workflow to any v2-specific secret)
   - `SITE_BASE_URL_V2`
@@ -98,7 +98,7 @@ Required GitHub secrets:
 Local upload command (same script as CI):
 
 ```bash
-BUNNY_STORAGE_ZONE_ID=... \
+BUNNY_STORAGE_ZONE_NAME=... \
 BUNNY_STORAGE_ZONE_PASSWORD=... \
 bundle exec ruby ./scripts/upload_to_bunny_storage.rb ./build
 ```

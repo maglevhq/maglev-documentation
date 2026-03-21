@@ -1,21 +1,23 @@
 ---
-title: Version 3 [BETA]
+title: Quickstart
 order: 2
 ---
-# Version 3 [BETA]
+
+# Quickstart
 
 {% description %}
-Instructions to install the single-site version (or MIT version) of Maglev v3 [BETA]
+Instructions to install the single-site version (or MIT version) of Maglev v2
 {% enddescription %}
-
 
 {% hint style="info" %}
 **Requirements**:\
+
 - Ruby 3+\
 - Ruby on Rails 7.2+\
 - Postgresql, SQLite, MySQL or MariaDB\
 - ImageMagick or libvips\
-{% endhint %}
+- Node 20+ (required for the Maglev 2.x asset build)
+  {% endhint %}
 
 ## Short version (1 minute installation) 😎
 
@@ -23,7 +25,7 @@ We wrote a Rails application template which will generate a brand new **Ruby on 
 
 ```bash
 $ rails new my-awesome-site \
-  -m https://raw.githubusercontent.com/maglevhq/maglev-core/master/template.rb \
+  -m https://raw.githubusercontent.com/maglevhq/maglev-core/v2.1.0/template.rb \
   --skip-action-cable
 
 $ cd my-awesome-site
@@ -51,7 +53,7 @@ Remove `--database=postgresql` if you'd like to use SQLite instead.
 Maglev depends on ActiveStorage for the content asset uploading. So you need to setup ActiveStorage like this:
 
 {% hint style="warning" %}
-We strongly recommend to enable the **image\_processing** gem in your Gemfile.\
+We strongly recommend to enable the **image_processing** gem in your Gemfile.\
 Please uncomment the line `gem 'image_processing', '~> 1.3'`
 {% endhint %}
 
@@ -63,10 +65,12 @@ $ bundle exec rails db:migrate
 Add now the Maglev engine to your app Gemfile file.
 
 {% code title="Gemfile" %}
+
 ```ruby
-gem 'maglevcms', '~> 3.0.0.beta2'
-gem 'maglevcms-hyperui-kit', '~> 1.3.0'
+gem 'maglevcms', '~> 2.1.0'
+gem 'maglevcms-hyperui-kit', '~> 1.2.0'
 ```
+
 {% endcode %}
 
 {% hint style="info" %}

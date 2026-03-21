@@ -30,14 +30,14 @@ jobs:
       - name: Select deployment target (main)
         if: github.ref_name == 'main'
         env:
-          BUNNY_STORAGE_ZONE_ID: ${{ secrets.BUNNY_STORAGE_ZONE_ID }}
+          BUNNY_STORAGE_ZONE_NAME: ${{ secrets.BUNNY_STORAGE_ZONE_NAME }}
           BUNNY_STORAGE_ZONE_PASSWORD: ${{ secrets.BUNNY_STORAGE_ZONE_PASSWORD }}
           BUNNY_ACCESS_KEY: ${{ secrets.BUNNY_ACCESS_KEY }}
           BUNNY_ZONE_ID: ${{ secrets.BUNNY_ZONE_ID }}
           SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
 
         run: |
-          echo "BUNNY_STORAGE_ZONE_ID=$BUNNY_STORAGE_ZONE_ID" >> "$GITHUB_ENV"
+          echo "BUNNY_STORAGE_ZONE_NAME=$BUNNY_STORAGE_ZONE_NAME" >> "$GITHUB_ENV"
           echo "BUNNY_STORAGE_ZONE_PASSWORD=$BUNNY_STORAGE_ZONE_PASSWORD" >> "$GITHUB_ENV"
           echo "BUNNY_ACCESS_KEY=$BUNNY_ACCESS_KEY" >> "$GITHUB_ENV"
           echo "SITE_BASE_URL=$SITE_BASE_URL" >> "$GITHUB_ENV"
@@ -46,14 +46,14 @@ jobs:
       - name: Select deployment target (v2)
         if: github.ref_name == 'v2'
         env:
-          BUNNY_STORAGE_ZONE_ID: ${{ secrets.BUNNY_STORAGE_ZONE_ID }}
+          BUNNY_STORAGE_ZONE_NAME: ${{ secrets.BUNNY_STORAGE_ZONE_NAME }}
           BUNNY_STORAGE_ZONE_PASSWORD: ${{ secrets.BUNNY_STORAGE_ZONE_PASSWORD }}
           BUNNY_ACCESS_KEY: ${{ secrets.BUNNY_ACCESS_KEY }}
           BUNNY_ZONE_ID: ${{ secrets.BUNNY_ZONE_ID_V2 }}
           SITE_BASE_URL: ${{ secrets.SITE_BASE_URL_V2 }}
 
         run: |
-          echo "BUNNY_STORAGE_ZONE_ID=$BUNNY_STORAGE_ZONE_ID" >> "$GITHUB_ENV"
+          echo "BUNNY_STORAGE_ZONE_NAME=$BUNNY_STORAGE_ZONE_NAME" >> "$GITHUB_ENV"
           echo "BUNNY_STORAGE_ZONE_PASSWORD=$BUNNY_STORAGE_ZONE_PASSWORD" >> "$GITHUB_ENV"
           echo "BUNNY_ACCESS_KEY=$BUNNY_ACCESS_KEY" >> "$GITHUB_ENV"
           echo "SITE_BASE_URL=$SITE_BASE_URL" >> "$GITHUB_ENV"

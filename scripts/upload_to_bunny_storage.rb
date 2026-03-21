@@ -7,9 +7,9 @@ require 'pathname'
 class BunnyStorageUploader
   STORAGE_HOST = 'storage.bunnycdn.com'.freeze
 
-  def initialize(source_dir:, storage_zone_id:, access_key:)
+  def initialize(source_dir:, storage_zone_name:, access_key:)
     @source_dir = File.expand_path(source_dir)
-    @storage_zone_id = storage_zone_id
+    @storage_zone_name = storage_zone_name
     @access_key = access_key
   end
 
@@ -35,11 +35,8 @@ class BunnyStorageUploader
 
   def upload_file(local_path, remote_path)
     encoded_path = remote_path.split('/').map { |segment| URI.encode_www_form_component(segment) }.join('/')
-    uri = URI("https://#{STORAGE_HOST}/#{@storage_zone_id}/#{encoded_path}")
+    uri = URI("https://#{STORAGE_HOST}/#{@storage_zone_name}/#{encoded_path}")
     body = File.binread(local_path)
-
-    pp uri.to_s
-    pp @access_key
 
     request = Net::HTTP::Put.new(uri)
     request['AccessKey'] = @access_key
@@ -67,7 +64,7 @@ source_dir = ARGV[0] || 'build'
 
 uploader = BunnyStorageUploader.new(
   source_dir: source_dir,
-  storage_zone_id: required_env!('BUNNY_STORAGE_ZONE_ID'),
+  storage_zone_name: required_env!('BUNNY_STORAGE_ZONE_NAME'),
   access_key: required_env!('BUNNY_STORAGE_ZONE_PASSWORD')
 )
 

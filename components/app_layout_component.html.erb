@@ -1,5 +1,10 @@
 <div class="isolate">
-  <div class="bg-white dark:bg-zinc-900">
+  <div class="fixed inset-x-0 top-0 z-30 border-b border-amber-900/20 bg-amber-100 px-4 py-2 text-center text-xs font-semibold tracking-wide text-amber-900 dark:border-amber-200/20 dark:bg-amber-500/15 dark:text-amber-100">
+    You are reading the Maglev v2 documentation. Looking for the latest version
+    <a href="https://docs.maglev.dev" class="underline decoration-amber-900/60 underline-offset-2 hover:decoration-amber-900 dark:decoration-amber-100/60 dark:hover:decoration-amber-100">https://docs.maglev.dev</a>
+  </div>
+
+  <div class="bg-white pt-10 dark:bg-zinc-900">
     <%= render AppLayout::TopbarComponent.new(current_page: current_page, pages: pages) do |topbar| %>
       <% topbar.with_links do %>
         <% topbar_links.each do |link| %>
