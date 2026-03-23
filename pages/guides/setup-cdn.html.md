@@ -1,6 +1,6 @@
 ---
 title: Setup CDN
-order: 6
+order: 7
 ---
 
 # Setup CDN
@@ -25,7 +25,7 @@ The `asset_host` configuration works with three different types of values:
 
 * **String**: A static CDN URL
 * **Proc**: A dynamic function that returns the CDN URL
-* **Nil**: Falls back to the Rails application's `asset_host` value (default behavior and if defined)
+* **Nil**: Uses the host app’s `config.asset_host` when set; otherwise assets use normal Rails URLs
 
 {% hint style="info" %}
 **Important Note**: Theme section screenshot URLs (displayed in the Maglev editor UI) are not handled by Maglev's `asset_host` configuration. These assets use the Rails application's `asset_host` configuration instead, as they are served through the main Rails application rather than the Maglev engine.

@@ -5,18 +5,18 @@ order: 5
 
 # Secure the editor
 
-In the Maglev Rails engine, we managed to avoid relying on any specific authentication system such as [Devise](https://github.com/heartcombo/devise).
+The Maglev engine does not depend on a specific authentication gem such as [Devise](https://github.com/heartcombo/devise).
 
-The counter part is this is now up to the developer installing Maglev to let Maglev know if the current user of his application has the rights to access the Editor UI.
+The tradeoff is that **your app** must tell Maglev whether the **current user** may open the editor.
 
-There are 2 major UI parts in Maglev: the Editor UI and the Admin UI. Those 2 parts don't require the same authentication mechanism.
+Maglev has two areas that matter for access control: the **Editor UI** and the **Admin UI**. They use different authentication hooks.
 
 ## Editor UI authentication
 
-You, as the developer, can pick one of the 2 ways of verifying whether the current user of the main application is allowed or not to access the Editor UI.
+You can wire editor access in either of these ways:
 
-* either you pass the name of a method globally available
-* or you pass a Proc that will be executed in the context of the Maglev::EditorUI controller which inherits not directly from the ApplicationController class of the main application.
+* pass **`config.is_authenticated`** a **symbol** naming a method available on your controllers, or
+* pass a **Proc** evaluated in the Maglev editor controller context (it does **not** inherit from your `ApplicationController` the same way a normal app controller does—check the engine if you rely on helpers).
 
 {% code title="config/initializers/maglev.rb" %}
 ```ruby
@@ -29,7 +29,7 @@ end
 ```
 {% endcode %}
 
-Both of those 2 solutions take the Maglev site as the first argument and they must return a boolean.
+Both forms must return a boolean (whether the user may use the editor). A **`Proc`** is usually called with the Maglev **`site`** as its first argument, as in the commented example above.
 
 If false is returned, Maglev will raise an exception that the ApplicationController can rescue from like in the following example:
 
@@ -91,13 +91,13 @@ Of course, you will have to set 2 new **ENV variables** in your project: `MAGLEV
 
 By default, the Admin UI is available without any credentials in the development and test environments.
 
-In production, it will require an username and password that can defined in the Maglev config file like this:
+In production, set a **username** and **password** in the Maglev config, for example:
 
 {% code title="config/initializers/maglev.rb" %}
 ```ruby
 Maglev.configure do |c|
   ...
-  # Admin UI authentication (https://docs.maglev.dev/guides/authentication)
+  # Admin UI authentication (see Secure the editor guide)
   config.admin_username = Rails.env.production? ? ENV.fetch('MAGLEV_ADMIN_USERNAME') : nil
   config.admin_password = Rails.env.production? ? ENV.fetch('MAGLEV_ADMIN_PASSWORD') : nil
   ...

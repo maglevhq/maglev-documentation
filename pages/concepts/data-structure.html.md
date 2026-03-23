@@ -9,19 +9,19 @@ The structure of a Maglev site and its child elements could be presented this wa
 
 ```
 My company site (Site)
-└── Home page (Page)
-    ├── Header (Section)
-    ├── Hero (Section)
-    ├── Call to Action (Section)
-    └── Features (Section)
-        ├── Feature #1 (Block)
-        ├── Feature #2 (Block)
-        └── Feature #3 (Block)
+├── Home page (Page)
+│   ├── Header (Section)
+│   ├── Hero (Section)
+│   ├── Call to Action (Section)
+│   └── Features (Section)
+│       ├── Feature #1 (Block)
+│       ├── Feature #2 (Block)
+│       └── Feature #3 (Block)
 ├── Our team (Page)
 └── Contact us (Page)
 ```
 
-In another words:
+In other words:
 
 * a site has many pages
 * a page has many sections
@@ -33,5 +33,5 @@ In another words:
 | -------- | ----------------- | ---------------------------------------------------- |
 | name     | string            | Name of the site.                                    |
 | sections | array of sections | Global sections.                                     |
-| domains  | array of string   | List of domains. **PRO version only.**               |
+| domains  | array of strings  | List of domains. **PRO version only.**               |
 | handle   | string            | Unique identifier of the site. **PRO version only.** |

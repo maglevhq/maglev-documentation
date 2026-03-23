@@ -5,33 +5,27 @@ order: 2
 
 # Setup collections
 
-Collections in Maglev are a powerful feature to expose the content of your Ruby on Rails application within the Maglev CMS. \
-In other words, thanks to this functionality, your **ActiveRecord** models can be used in an editorial way in the Maglev editor UI.
+**Collections** let you surface your Rails **ActiveRecord** models inside the Maglev editor—for example, so editors can pick a “product of the month” by hand instead of relying only on SQL.
 
-Here a quick example: \
-\
-Let's assume you built a RoR e-commerce site with a **products** collection. Now, your client is asking you for a way to display the product of the month on the home page. This product is an editor choice and it can't fetched from a magic SQL query.\
-And, of course, the client wants to use the fancy Maglev Editor UI to pick her product when editing the home page of her site.\
-We built the **collections** feature for this exact use case.
+Here’s a typical case: you run an e-commerce Rails app with a **`products`** collection. The client wants one featured product on the home page, chosen in the Maglev UI when they edit that page. Collections exist for that workflow.
 
 {% hint style="info" %}
-We could also have built within Maglev a content type builder like what [Strapi](https://strapi.io) offers but we believe that **Rails** in combination with [ActiveAdmin](https://activeadmin.info) or [Avo](https://avohq.io) does a more reliable job in the long run. Besides Maglev only targets the visual editing part of a CMS.
+We could have built a content-type builder inside Maglev (similar to [Strapi](https://strapi.io)), but **Rails** plus tools like [ActiveAdmin](https://activeadmin.info) or [Avo](https://avohq.io) tends to scale better for structured data. Maglev focuses on the visual page-editing layer.
 {% endhint %}
 
 ## Define collections
 
-Maglev requires a mapping object defined in its config file to expose the ActiveRecord models that will be used by the Maglev sections.
+Declare collections in the Maglev initializer. Each entry needs at least:
 
-Maglev requires at least 2 pieces of information for each collection:
+- **`model`**: ActiveRecord class name (string)
+- **`fields`**: how to read a **label** and optionally an **image** from each record
 
-* **model** which is the name of the ActiveRecord class
-* **fields** which describes how to get the label and/or the image from a record
-
-In order to display the list of choices in the CollectionItem component, Maglev needs a **label** and/or an **image** (optional) for each item.
+The editor picker needs at least a **label** for each row; **image** is optional but improves the UI.
 
 ![An editor selecting a product](pages/setup-collections-1.png)
 
-{% code title="config/initializer/maglev.rb" %}
+{% code title="config/initializers/maglev.rb" %}
+
 ```ruby
 Maglev.configure do |config|
   # ...
@@ -53,12 +47,17 @@ Maglev.configure do |config|
   # ...
 end
 ```
+
 {% endcode %}
 
 {% hint style="info" %}
-The image alias pointing to a method of the model class **MUST** return a **permanent url**. So, if you use ActiveStorage, we recommend you to [follow this guide here](https://edgeguides.rubyonrails.org/active_storage_overview.html#putting-a-cdn-in-front-of-active-storage) and implement something like the following in your model:
+If you map **`image`** to a model method, that method **must** return a **stable, public URL** (for example via a CDN). With Active Storage, see the Rails guide on [putting a CDN in front of Active Storage](https://edgeguides.rubyonrails.org/active_storage_overview.html#putting-a-cdn-in-front-of-active-storage).
+{% endhint %}
+
+Example `thumbnail_url` helper (adjust to match your CDN helper name):
 
 {% code title="app/models/product.rb" %}
+
 ```ruby
 class Product < ApplicationRecord
   has_one_attached :thumbnail
@@ -70,24 +69,21 @@ class Product < ApplicationRecord
   end
 end
 ```
+
 {% endcode %}
-{% endhint %}
 
-## Handle custom DB query
+## Custom database queries
 
-By default, the **collections** feature will perform a simple SQL query to fetch the items for the Maglev editor UI component. \
-\
-But sometimes, we'll need a more complex query.
+By default, Maglev loads collection items with a simple query. For finer control (for example, hiding sold-out products), point the collection at a **custom class method** on the model.
 
-Back to our last example, the client might not want to see sold out products in the CollectionItem component. In that case, we need to inform Maglev that it will have to call a custom class method to fetch those items.
+That method must accept these **keyword arguments**:
 
-This custom class method expects **3 named parameters**:
+- `site`: the instance of the Maglev site
+- `keyword`: the text typed by the editor to filter the results
+- `max_items`: maximum number of rows to return
 
-* `site`: the instance of the Maglev site
-* `keyword`: the text typed by the editor to filter the results
-* `max_items`: the number of items which has to returned by the method
+{% code title="config/initializers/maglev.rb" %}
 
-{% code title="config/initializer/maglev.rb" %}
 ```ruby
 Maglev.configure do |config|
   # ...
@@ -110,11 +106,13 @@ Maglev.configure do |config|
   # ...
 end
 ```
+
 {% endcode %}
 
-And within your **Product** class, you will have to declare your `maglev_fetch_without_sold_out` method like this:
+On **`Product`**, implement the method like this:
 
 {% code title="app/models/product.rb" %}
+
 ```ruby
 class Product < ApplicationRecord
 #...
@@ -128,8 +126,9 @@ class Product < ApplicationRecord
 #...
 end
 ```
+
 {% endcode %}
 
 ## Use collections in sections
 
-Please visit the documentation [here](https://docs.maglev.dev/concepts/setting#collection_item).
+See the [`collection_item` setting](/concepts/setting#collection_item) in the concepts documentation.

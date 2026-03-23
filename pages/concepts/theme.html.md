@@ -5,9 +5,9 @@ order: 3
 
 # Theme
 
-A Maglev site is referenced by a `theme` and a `theme` includes sections.
+Each Maglev site uses a **`theme`**. The theme holds your section definitions and how they are organized.
 
-You can't create a site without a theme.
+You cannot create a site without a theme.
 
 {% hint style="info" %}
 The MIT version of Maglev comes with a single theme and it's not possible to add another theme. \
@@ -16,7 +16,7 @@ To enable the **multi-sites / multi-themes** functionalities, you need the licen
 Please [contact us](https://www.maglev.dev/contact) for more details.
 {% endhint %}
 
-During the Maglev installation, a couple of files were added by our generators.
+When you install Maglev, the generators add a small set of files.
 
 ```
 Rails app root
@@ -41,11 +41,11 @@ The `theme.yml` file describes the definition (name, description, ...etc) of the
 
 | Attribute name      | Type                      | Description                                                                                                                   |
 | ------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| id                  | string                    | Identifier of the theme. You can it but with caution, especially if you've got pages including sections of the previous theme |
-| name                | string                    | Name of the theme (displayed in the dev panel)                                                                                |
-| description         | string                    | Description of the theme (displayed in the dev panel)                                                                         |
+| id                  | string                    | Theme identifier. Change it with caution, especially if you already have pages using sections from the previous theme. |
+| name                | string                    | Name of the theme (shown in the Maglev UI).                                                                                |
+| description         | string                    | Description of the theme (shown in the Maglev UI).                                                                         |
 | section\_categories | array of hashes (id/name) | List of section categories. Required by the editor for the section picker.                                                    |
-| pages               | array of hashes           | Default pages generated when a site is created. Specifically useful by the PRO version of Maglev                              |
+| pages               | array of hashes           | Default pages created when a site is provisioned. Especially relevant for the PRO version of Maglev.                              |
 
 Quick example:
 
@@ -71,9 +71,9 @@ pages:
 
 ## Template
 
-The `layout.html.erb` is being rendered by the Maglev CMS functionality.
+Maglev renders `layout.html.erb` for themed pages.
 
-The minimal requirement is to have the following **ERB** code inside this file:
+At minimum, include the following **ERB** in that file:
 
 {% code title="layout.html.erb" %}
 ```markup
@@ -83,4 +83,4 @@ The minimal requirement is to have the following **ERB** code inside this file:
 ```
 {% endcode %}
 
-This code is in charge of rendering the list of sections of a page.
+That call renders the page’s sections in order.

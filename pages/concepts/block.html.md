@@ -8,34 +8,34 @@ order: 7
 A `section` references a list of `block` types.
 
 {% hint style="info" %}
-A section might have no section in its definition.
+A section might define **no** block types.
 {% endhint %}
 
-Here are some examples when having block types is useful:
+Here are some examples of when block types are useful:
 
 * a **header** section will need a **menu\_item** block type to describe the top menu.
 * a **carousel** section will need different **vignette** block types if it wants to display a list of mixed image and video vignettes.
 * a **faq** section will need a **question\_answer** block type to list all the questions and their answers.
 
-By default, in the editor UI, the instance of blocks are displayed as a list which can be re-ordered.\
-But in some case, a list will be too restrictive and a tree representation will be more appropriate. So, you will have to set the `block_display`  attribute to **true** in the section definition.
+By default, blocks appear in the editor as a **list** that editors can reorder.\
+But in some cases a list is too restrictive and a **tree** layout fits better. Set **`blocks_presentation`** to **`tree`** in the section definition (see the [Section](/concepts/section) page).
 
 ## Definition file
 
-Block types are declared in the same file as its parent section under the `blocks` attribute.
+Block types are declared in the parent section’s YAML file under the `blocks` attribute.
 
 | Attribute name | Type              | Description                                                                                                                 |
 | -------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | name           | string            | Name of the block (displayed in the editor UI)                                                                              |
-| type           | string            | Identifier of the block (useful in the template when differenciating the different kind of blocks among a section).         |
+| type           | string            | Identifier of the block (useful in the template when differentiating block types within a section).         |
 | settings       | array of settings | Work the same as in the section definition.                                                                                 |
-| accept         | array of strings  | If the `blocks_presentation` option has been set to `tree`, a block can decide to accept several kind of other block types. |
+| accept         | array of strings  | If `blocks_presentation` is set to `tree`, a block can accept several other block types. |
 
 ## Template
 
 You can iterate through the list of blocks of your section.
 
-Each maglev block owns a couple of attributes / methods.
+Each Maglev block exposes a few attributes and methods.
 
 | Attribute / Method | Type    | Description                                                                                                                                                                                   |
 | ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -61,7 +61,7 @@ Each maglev block owns a couple of attributes / methods.
 
 You can also skip our helpers and write your code in a more plain HTML approach.
 
-The same way we do in the `section` template,  you've to instruct the editor UI that a block is being displayed. To achieve it, you have to put `<%= block.dom_data %>` in the HTML node tag wrapping your block.
+As with section templates, you must mark up the DOM so the editor recognizes each block. Add `<%= maglev_block.dom_data %>` on the HTML element that wraps the block.
 
 ```markup
 <nav>

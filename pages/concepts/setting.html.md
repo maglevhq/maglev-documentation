@@ -7,17 +7,17 @@ order: 6
 
 A `section` or `block` definition comes with a list of `settings`. Those settings will be used by the **editor UI** to render the proper content form of a section (or block).
 
-For instance, if your section includes 2 settings, let's say a title (text) and a background image (image), then the editor UI will generate for this section a form with 2 input elements: a text input for the input and an image picker to select the background image.
+For instance, if your section has two settings—a title (`text`) and a background image (`image`)—the editor renders a form with a text field and an image picker.
 
 ## Default definition setting attributes
 
 | Name      | Type    | Description                                                                                                                                                                                               |
 | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | label     | string  | Label displayed in the editor UI as the input label.                                                                                                                                                      |
-| id        | string  | Identifier of the section. Required when you want to display the value of the setting inside the HTML template of the section or block. It has to be unique among the settings of a section.              |
-| type      | string  | Describe which kind of input the editor UI will render. See below for a list of available types.                                                                                                          |
+| id        | string  | Identifier of the setting. Use it in templates to read the value. Must be unique among the settings of that section or block.              |
+| type      | string  | Which kind of input the editor renders. See the list of available types below.                                                                                                          |
 | default   | string  | <p>When a section or a block is added to the page, in order to avoid blank content, Maglev will fill the section or block content with the default value of each setting. </p><p>A value is required.</p> |
-|  advanced | boolean | If the setting is not content related, the editor UI will put this setting in a different tab in the section form.                                                                                        |
+| advanced | boolean | If the setting is not content-related, the editor shows it on a separate tab in the section form.                                                                                        |
 
 ## Available types and their options
 
@@ -112,7 +112,7 @@ settings:
 
 | Property  | Type    | Description                                |
 | --------- | ------- | ------------------------------------------ |
-| url       | string  | Url of the image                           |
+| url       | string  | URL of the image                           |
 | width     | integer | Width of the original image (in px)        |
 | height    | integer | Height of the original image (in px)       |
 | alt\_text | string  | Alternate text added by the content editor |
@@ -126,7 +126,7 @@ Display a link picker. The content editor will have the choice between a link to
 
 | Option     | Type    | Description                                                                                                                               |
 | ---------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| with\_text | Boolean | <p>False if the developer only needs an url.<br>Otherwise, the editor UI will present a text field <br>in addition on the URL picker.</p> |
+| with\_text | Boolean | <p>False if you only need a URL.<br>Otherwise, the editor also shows a text field <br>in addition to the URL picker.</p> |
 
 {% code title="app/theme/sections/sample.yml" %}
 ```yaml
@@ -175,7 +175,7 @@ settings:
 | **Property**       | Type    | Description                                                                           |
 | ------------------ | ------- | ------------------------------------------------------------------------------------- |
 | href               | String  | URL of the page / external URL / email address.                                       |
-| text               | String  | Text typed by the content editor (if functionality enabled by the `with_text` option. |
+| text               | String  | Text from the editor when the `with_text` option is enabled. |
 | open\_new\_window? | Boolean | True if the content editor wants the link to be opened in a new browser tab.          |
 | target\_blank      | String  | Returns `_blank` or nil depending on the property above.                              |
 | to\_s              | String  | Alias of the `href` property.                                                         |
@@ -186,19 +186,19 @@ settings:
 
 ### collection\_item
 
-This setting type allows content editors to select an instance of any ActiveRecord class of the main Ruby on Rails application. For instance, in your e-commerce site, if your section is named `featured_product_01`, chances are big that you will need a `collection_item` setting type to let your editors pick the product of their choice among the `products` table.
+This setting type lets editors pick a record from any ActiveRecord model in your Rails app. For example, on an e-commerce site, a `featured_product_01` section often uses a `collection_item` setting so editors can choose a product from the `products` table.
 
 **Definition:**
 
 | Option         | Type   | Description                                                 |
 | -------------- | ------ | ----------------------------------------------------------- |
-| collection\_id | String | <p>ID of the collection as set up <br>in theme.yml file</p> |
+| collection\_id | String | <p>Collection id as declared in <code>theme.yml</code></p> |
 
 {% code title="app/theme/sections/sample.yml" %}
 ```yaml
 settings:
 - label: "Product"
-  id: collection_item
+  id: product
   type: collection_item
   collection_id: products
 
@@ -223,7 +223,7 @@ settings:
 {% code title="app/views/theme/sections/sample.html.erb" %}
 ```markup
 <% if maglev_section.settings.product.exists? %>
-  <div class="featured-product" data-maglev-id="<%= section.settings.product.dom_data %>">
+  <div class="featured-product" <%= maglev_section.settings.product.dom_data %>>
     <h2><%= maglev_section.settings.product.item.name %></h2>
     <p><%= number_to_currency maglev_section.settings.product.item.price %></p>
   </div>
@@ -234,7 +234,7 @@ settings:
 {% endtabs %}
 
 {% hint style="warning" %}
-If the content editor hasn't chosen an item or if the item doesn't exist anymore, the setting tag won't rendered.
+If the editor has not chosen an item, or the record no longer exists, the setting tag is not rendered.
 {% endhint %}
 
 **List of properties:**
@@ -280,7 +280,7 @@ settings:
 | **Property** | Type    | Description                                                     |
 | ------------ | ------- | --------------------------------------------------------------- |
 | dark?        | Boolean | True if the `brightness` index of this color is less than 128.  |
-| light?       | Boolean | True if the `brightness` index of this color is great than 155. |
+| light?       | Boolean | True if the `brightness` index of this color is greater than 155. |
 | brightness   | Integer | Value between 0 and 255.                                        |
 
 ### checkbox
@@ -292,10 +292,10 @@ Display a toggle input.
 {% code title="app/theme/sections/sample.yml" %}
 ```yaml
 settings:
-- label: "Display warning message ?"
-    id: cta_link
-    type: checkbox
-    default: false
+- label: "Display warning message?"
+  id: display_warning_message
+  type: checkbox
+  default: false
 ```
 {% endcode %}
 
@@ -312,7 +312,7 @@ settings:
 {% hint style="warning" %}
 Don't write `<% if section.settings.display_warning_message %>`
 
-since the condition will always be true. Instead, use `true?`or `false?`.
+since the condition will always be true. Instead, use `true?` or `false?`.
 {% endhint %}
 
 **List of properties:**
@@ -332,9 +332,9 @@ Display a popup to select an icon among a set of icons. Follow the [instructions
 ```yaml
 settings:
 - label: "Icon"
-    id: cta_icon
-    type: icon
-    default: 'fa fa-github'
+  id: cta_icon
+  type: icon
+  default: 'fa fa-github'
 ```
 {% endcode %}
 
@@ -400,7 +400,7 @@ settings:
 
 ### hint
 
-Display an information in the section content editing form. For instance, it could be used to give some tips to the content editors.
+Shows informational text in the section editing form—for example, tips for content editors.
 
 {% hint style="info" %}
 **It is not intended to be displayed.**
@@ -412,14 +412,14 @@ Display an information in the section content editing form. For instance, it cou
 ```yaml
 settings:
 - label: "This text will be displayed in the editor UI"
-    id: some_hint
-    type: hint
+  id: some_hint
+  type: hint
 ```
 {% endcode %}
 
 ### divider
 
-Display a line between 2 adjacent settings in the editor UI. The label can be displayed if the `with_hint`option is enabled.
+Display a line between two adjacent settings in the editor UI. The label can be shown if the `with_hint` option is enabled.
 
 {% hint style="info" %}
 **It is not intended to be displayed.**
@@ -431,9 +431,9 @@ Display a line between 2 adjacent settings in the editor UI. The label can be di
 ```yaml
 settings:
 - label: "This text will be displayed in the editor UI"
-    id: a_divider_n_hint
-    type: divider
-    with_hint: true
+  id: a_divider_and_hint
+  type: divider
+  with_hint: true
 ```
 {% endcode %}
 
@@ -445,7 +445,7 @@ While the `label` property defines the default text displayed in the editor UI, 
 
 ### Translation structure
 
-In your RoR application, add your translations in your locale files (config/locales/\[locale].yml) following this structure:
+In your Rails application, add translations in your locale files (`config/locales/[locale].yml`) using this structure:
 
 ```yaml
 en:

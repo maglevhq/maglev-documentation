@@ -15,7 +15,7 @@ By default, here is a quick sample of the Editor UI:
 
 ![the Maglev Editor UI with the default style.](pages/personalize-the-editor-1.jpg)
 
-During the Maglev installation, a new file was added in your Rails application at the following location `config/initializers/maglev.rb`.
+Maglev’s installer adds `config/initializers/maglev.rb` to your app.
 
 ```ruby
 Maglev.configure do |c|
@@ -60,7 +60,7 @@ While the `label` property of a section defines the default text displayed in th
 
 ### Translation structure
 
-In your RoR application, add your translations in your locale files (config/locales/\[locale].yml) following this structure:
+In your Rails app, add entries under `config/locales/<locale>.yml` using this structure:
 
 ```yaml
 [locale]:

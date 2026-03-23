@@ -1,6 +1,6 @@
 ---
 title: CLI Commands
-order: 6
+order: 8
 ---
 
 # CLI Commands

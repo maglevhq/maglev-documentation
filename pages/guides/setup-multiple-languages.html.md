@@ -9,9 +9,9 @@ You can set up your site so that you can edit the content of your pages in diffe
 
 ## Installation
 
-The installation of new locales is an easy job to do.
+Adding locales is straightforward.
 
-Open your `config/initializers/maglev.rb` file and start adding the following lines:
+Open `config/initializers/maglev.rb` and add something like:
 
 {% code title="config/initializers/maglev.rb" %}
 ```ruby
@@ -42,7 +42,7 @@ Once it's done, go to the editor UI and you should see a locale picker like the 
 
 A locale switcher is the UI component you usually see at the top of a localized site. It helps visitors to quickly change the locale of the current page. \
 \
-By default, Maglev isn't bundled with a plug-in-play locale switcher, mainly because the UI/UX of such component might vary a lot between sites.
+Maglev does not ship a plug-and-play locale switcher, because the UI varies a lot between sites.
 
 Instead, Maglev provides the helpers required to build one.
 
@@ -63,10 +63,10 @@ Here is an example:
 
 ## Rules
 
-The multi-languages functionality comes with several rules:
+Multilingual sites follow these rules:
 
 * the title, path, sections content and seo information attributes of a page can be translated.
 * each translation of the page is independent. For instance, a page A in the **EN** locale can have **different sections** compared to its version in the **FR** locale.
 * the default locale is the first locale of the site.
 * when previewing a page in the default locale, the path of the page won't include the locale. Example: `mysite.com/about-us`
-* when previewing a page in a local different from the default one, the page of the page will include the locale prefix. Example: `mysite.com/fr/a-notre-sujet`
+* when previewing a page in a **non-default** locale, the URL includes the locale prefix. Example: `mysite.com/fr/a-notre-sujet`

@@ -6,10 +6,10 @@ order: 0
 # AI Assistant Integration
 
 {% description %}
-Using the Maglev LLM Markdown File in IDEs to increase your productivity!
+Use the bundled Maglev documentation export with IDE AI features to work faster.
 {% enddescription %}
 
-Maglev provides a combined markdown file (`full_site.md`) containing all documentation pages. This file is designed to be consumed by local AI tools, such as those integrated in modern IDEs, to help developers build Maglev sections more efficiently.
+Maglev provides a combined markdown file (`full_site.md`) containing all documentation pages. The file is meant for local AI tools (including assistants in modern IDEs) so you get answers grounded in the Maglev docs while building sections.
 
 This guide explains how to set up and use the `full_site.md` file in Cursor (the first IDE we cover). Instructions for other IDEs will be added soon.
 

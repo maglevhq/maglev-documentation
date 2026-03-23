@@ -5,15 +5,17 @@ order: 6
 
 # Build a menu section
 
-In most cases, your site will need to display a menu / navbar to show the pages available to the visitors. A section like this one for instance.
+In most cases, your site needs a menu or navbar that lists the pages available to visitors—typically implemented as a Maglev section.
 
-TODO: show an image hero + navbar
+![Hero section with navbar.](pages/navbar.webp)
+
+**Legend.** The page shows a common layout: a **navbar** (brand + primary links) fixed at the top, built as a **site-scoped** Maglev section so the same menu appears on every page, with a **hero** block below that belongs to the page content.
 
 ## Simple menu
 
 ### Generate the section
 
-First, we've to generate a new section from our terminal. Inside your Rails application folder, type:
+First, generate a new section from your Rails application root:
 
 ```bash
 $ bundle exec rails g maglev:section navbar_01 --category=navbars --settings \
@@ -22,7 +24,7 @@ block:navbar_item:link:link
 
 ```
 
-In other words, we just told Maglev to generate a section named navbar\_01 which will have a logo and a list of navbar items.
+That creates a section named `navbar_01` with a logo setting and a list of navbar item blocks.
 
 {% hint style="info" %}
 Make sure you added the `navbars` category in your `theme.yml` file.
@@ -32,7 +34,7 @@ Make sure you added the `navbars` category in your `theme.yml` file.
 
 Open the `app/theme/sections/navbar_01.yml` file with your code editor.
 
-Since we want all the pages created by the content editors from the editor UI **to share the same content**, we've to uncomment the line about the `site_scoped` attribute.
+Because the navbar should be **the same on every page**, uncomment **`site_scoped: true`** in the section definition.
 
 {% code title="app/theme/sections/navbar_01.yml" %}
 ```yaml
@@ -46,7 +48,7 @@ blocks_label: "Navbar items"
 ```
 {% endcode %}
 
-Next, we want the link for navbar item to have a text that will be modified by the content editor. We could also have appended a text setting to the navbar\_item block type but there is a simpler way: using the `with_text` option of the link setting type.
+Next, give each item **editable link text**. Instead of adding a separate text setting on the `navbar_item` block, use the link type’s **`with_text: true`** option.
 
 {% code title="app/theme/sections/navbar_01.yml" %}
 ```yaml
@@ -67,7 +69,7 @@ blocks:
 ```
 {% endcode %}
 
-Then, in order to test our section with non fake content, we will provide some sample content. It's easily done with uncommenting and modifying the last part of the YML file.
+To preview the section with realistic content, uncomment and edit the **`sample`** block at the bottom of the YAML file.
 
 {% code title="app/theme/sections/navbar_01.yml" %}
 ```yaml
@@ -103,7 +105,7 @@ sample:
 
 ### Write the template
 
-We'll rely on Tailwindcss to style our navbar but we can use any HTML/CSS library.
+This example uses **Tailwind CSS** for styling; you can use any CSS approach you prefer.
 
 {% code title="app/views/theme/sections/navbar_01.html.erb" %}
 ```erb
@@ -116,7 +118,7 @@ We'll rely on Tailwindcss to style our navbar but we can use any HTML/CSS librar
 
       <nav class="ml-auto">
         <ul class="flex items-center">
-          <% section.blocks.each do |maglev_block| %>
+          <% maglev_section.blocks.each do |maglev_block| %>
             <%= maglev_block.wrapper_tag.li class: 'ml-8' do %>
               <%= maglev_block.setting_tag :link, class: 'hover:underline' %>
             <% end %>
@@ -129,11 +131,11 @@ We'll rely on Tailwindcss to style our navbar but we can use any HTML/CSS librar
 ```
 {% endcode %}
 
-## Highlighting Active Menu Items
+## Highlighting the active menu item
 
-To highlight the currently active menu item, you can use the `active?` method available on link settings. This method returns `true` when the link points to the current page (for page-type links).
+Use the **`active?`** method on link settings: it is `true` when the link targets the **current page** (for `link_type: "page"`).
 
-Here's how to implement active menu highlighting:
+Example:
 
 {% code title="app/views/theme/sections/navbar_01.html.erb" %}
 ```erb
@@ -146,7 +148,7 @@ Here's how to implement active menu highlighting:
 
       <nav class="ml-auto">
         <ul class="flex items-center">
-          <% section.blocks.each do |maglev_block| %>
+          <% maglev_section.blocks.each do |maglev_block| %>
             <%# Determine active state and apply appropriate classes %>
             <% is_active = maglev_block.settings.link.active? %>
             <%= maglev_block.wrapper_tag.li class: class_names("ml-8", { "text-blue-600 font-semibold": is_active }) do %>
@@ -168,14 +170,14 @@ Here's how to implement active menu highlighting:
 - For external URLs or other link types, `active?` will always return `false`
 
 {% hint style="info" %}
-Go to the[ Create a new section](https://docs.maglev.dev/guides/create-a-new-section) documentation page to know how to test and use your section in the editor UI.
+See [Create a new section](/guides/create-a-new-section) for how to test and use your section in the editor.
 {% endhint %}
 
-## Multi-levels menu
+## Multi-level menu
 
-There are a few minor differences between the **Simple menu** we built in the previous chapter and this one.
+There are a few differences between the **simple menu** above and this variant.
 
-In the section definition, we only have to update the `block_presentation` attribute.
+In the section definition, set **`blocks_presentation`** to **`tree`**.
 
 {% code title="app/theme/sections/navbar_01.yml" %}
 ```yaml
@@ -189,7 +191,7 @@ blocks_presentation: "tree"
 ```
 {% endcode %}
 
-Next, in the section template, we need to display the children of a navbar items.
+In the template, render **child** blocks when a top-level item has nested items.
 
 {% code title="app/views/theme/sections/navbar_01.html.erb" %}
 ```erb
@@ -202,7 +204,7 @@ Next, in the section template, we need to display the children of a navbar items
 
       <nav class="ml-auto">
         <ul class="flex items-center">
-          <% section.blocks.each do |maglev_block| %>
+          <% maglev_section.blocks.each do |maglev_block| %>
             <%= maglev_block.wrapper_tag.li class: 'ml-8 relative' do %>
               <%= maglev_block.setting_tag :link, class: 'hover:underline' %>
 
@@ -267,8 +269,8 @@ sample:
 ```
 {% endcode %}
 
-The difference between this menu sample and the previous one is the adding of a new key (`children`) in the block attributes.
+The only structural change in the sample data is the **`children`** key on the block that has sub-items.
 
-## Menu with different type of navbar items
+## Menu with different types of navbar items
 
 Coming soon

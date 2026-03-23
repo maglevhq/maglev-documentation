@@ -5,11 +5,11 @@ order: 1
 
 # Create a new section
 
-This guide helps you to create a maglev section and integrates it in the editor UI.
+This guide walks you through creating a **Maglev** section and using it in the editor.
 
 ## Generate the section files
 
-The **maglev** gem offers a Rails generator to quickly generate the files required by a maglev section.
+The **Maglev** gem provides a Rails generator for the files a section needs.
 
 The following command will generate a sample section with a few settings and blocks.
 
@@ -34,7 +34,7 @@ block:<TYPE>:<ID of setting N>:<TYPE> \
 
 ### Example
 
-Here is an example of a section with one single type of block
+Here is an example of a section with one block type
 
 ```bash
 > bundle exec rails g maglev:section showcase_01 \
@@ -46,24 +46,30 @@ block:project:name:text block:project:screenshot:image
 
 ## Code the section
 
-Once the different files of the section have been generated, it's time to complete the definition and template files.
+After the generator runs, finish the section by editing its **definition** (YAML) and **template** (ERB) on disk. There is **no separate theme admin** for this step—you change the files directly, then reload the **Maglev editor** to see updates.
 
-Start by visiting the [admin url](http://localhost:3000/maglev/admin/theme) once you've started your Rails server and click to the title of your newly generated section. You will see a screen like this one.
+Paths follow the section id you passed to the generator:
 
-![Maglev admin page](pages/create-a-new-section-1.png)
+| File            | Path pattern                                      |
+| --------------- | ------------------------------------------------- |
+| Definition      | `app/theme/sections/<section_id>.yml`             |
+| Section template | `app/views/theme/sections/<section_id>.html.erb` |
 
-There are 3 different buttons on this screen:
+Examples matching the commands above:
 
-* **Open editor**: it opens the Editor UI
-* **Open in a new tab**: it opens the section in a new tab without the maglev admin layout. Very useful when coding the template of the section.
-* **Take screenshot**: once your section looks good (please visit the next sub chapter before) , it's time to take a screenshot of it for the editor UI. It will be displayed in the list of sections available for the editors.
+* `rails g maglev:section example` → `app/theme/sections/example.yml` and `app/views/theme/sections/example.html.erb`
+* `rails g maglev:section showcase_01 ...` → `app/theme/sections/showcase_01.yml` and `app/views/theme/sections/showcase_01.html.erb`
 
-## Provide a sample content
+Use **`maglev_section`** (and **`maglev_block`** when you have blocks) in the ERB template to render settings and iterate blocks. Details and helpers are in the [Section](/concepts/section) and [Block](/concepts/block) concept pages.
 
-Providing a sample content for a section is helpful in 3 main cases:
+When you are ready to try it in the UI, start the Rails server and open the editor (typically [http://localhost:3000/maglev/editor](http://localhost:3000/maglev/editor)), add the section to a page, and refresh after template changes.
+
+## Provide sample content
+
+Sample content helps in three situations:
 
 * when writing the template of the section with "real" content.
-* when generating a screenshot of the section with "real" content".
+* when generating a screenshot of the section with realistic content.
 * when an editor picks the section in the editor UI. She won't see a blank section.
 
 This can be achieved by declaring the **sample** attribute in the definition file of the section.

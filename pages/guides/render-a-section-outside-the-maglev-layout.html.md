@@ -1,6 +1,6 @@
 ---
 title: Render a section outside the Maglev layout
-order: 7
+order: 9
 ---
 
 # Render a section outside the Maglev layout
@@ -9,32 +9,29 @@ order: 7
 This guide mainly targets the users of the **MIT version**.
 {% endhint %}
 
-When developing your Maglev site, it might happen that you will need pages that won't necessarily be  editable from the Maglev editor UI. \
-\
-For example, let's say you're deveveloping an e-commerce site and you are building the ERB template of the product detail page. \
-Your product ERB template will certainly require 2 specific sections from your Maglev site: the navbar and the footer. 
+Some pages are **not** fully managed in the Maglev editor—for example, a Rails **product detail** template that still needs your **navbar** and **footer** from Maglev.
 
-In order to fill that requirement, the Maglev engine comes with a Rails controller concern allowing the developer to render a specific section outside the Maglev ERB layout.
+For that, the engine provides a controller concern so you can **`render_maglev_section`** outside the Maglev theme layout.
 
-**The content of those sections will only be editable from the Maglev pages only.**
+**Content for those sections is still edited in the Maglev editor** (for example as site-scoped navbar/footer blocks). The standalone template only **renders** the current published output.
 
 ## Inside your Rails controller
 
 {% hint style="warning" %}
-Your sections have to be **site scoped** to work outside the Maglev layout scope. See the documentation [here](https://docs.maglev.dev/concepts/section#definition-file) and here for more explanation.
+Sections must be **`site_scoped`** to load this way. See [Section definition](/concepts/section#definition-file).
 {% endhint %}
 
-You first have to enhance your Rails controller by adding our custom controller concern. 
+Include the engine’s **`Maglev::StandaloneSectionsConcern`** in the controller that serves the page (or in `ApplicationController`).
 
-The code below is based on the e-commerce site example we were talking about above.
+Example for a product page:
 
 {% code title="app/controllers/products_controller.rb" %}
 ```ruby
 class ProductsController < ApplicationController
-  include Maglev::StandaloneSectionsConcern # include all the methods require by Maglev to load and render site scoped sections
+  include Maglev::StandaloneSectionsConcern # methods required to load site-scoped sections
 
   def show
-    fetch_maglev_site_scoped_sections # load the content of all the site scoped section
+    fetch_maglev_site_scoped_sections # loads all site-scoped sections for this request
     @product = Product.find(params[:id])
   end
 end
@@ -42,12 +39,12 @@ end
 ```
 {% endcode %}
 
-Another solution to have access to the site scoped sections across all your controllers would be:
+To load site-scoped sections on **every** request:
 
 {% code title="app/controllers/application_controller.rb" %}
 ```ruby
 class ApplicationController < ActionController::Base
-  include Maglev::StandaloneSectionsConcern # include all the methods require by Maglev to load and render site scoped sections
+  include Maglev::StandaloneSectionsConcern # methods required to load site-scoped sections
 
   before_action :fetch_maglev_site_scoped_sections
 end
@@ -70,5 +67,5 @@ end
 {% endcode %}
 
 {% hint style="info" %}
-If we have modified your `application_controller` file instead, we would have put the code in charge of rendering the navbar and footer in the `app/views/layouts/application.html.erb`.
+If you include the concern in `ApplicationController`, you will usually render shared chrome (navbar, footer) from `app/views/layouts/application.html.erb` so every page gets it.
 {% endhint %}
