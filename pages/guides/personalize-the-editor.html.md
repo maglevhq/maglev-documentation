@@ -45,6 +45,13 @@ Maglev.configure do |c|
 
   # Uploader engine (:active_storage is only supported for now)
   # c.uploader = :active_storage
+
+  # Pagination for page lists and the assets modal (optional)
+  # c.pagination = { pages: -1, assets: 16 } # -1 means no pagination for pages
+
+  # When you customize the Editor UI (e.g. extra ERB) with Tailwind classes that are
+  # not in Maglev’s default bundle, add folders here so the Tailwind watcher scans them.
+  # c.tailwindcss_folders = [Rails.root.join('app/views/maglev/editor')]
 end
 
 ```
@@ -53,6 +60,36 @@ end
 By modifying the values within this file, you will be able to achieve something like this:
 
 ![the Maglev Editor UI with a different logo, tab title and primary color.](pages/personalize-the-editor-2.jpg)
+
+## Pagination
+
+You can tune how the editor loads long lists by setting `pagination` in `config/initializers/maglev.rb`. Pass a hash with any of the following keys:
+
+- **`pages`** — Pagination for the site’s page list in the editor. Use `-1` to disable pagination and load every page at once.
+- **`assets`** — How many assets appear per page in the assets picker modal.
+
+```ruby
+Maglev.configure do |config|
+  config.pagination = {
+    pages: -1,
+    assets: 16
+  }
+end
+```
+
+## Tailwind CSS watch folders
+
+This option is for when you **change the Editor UI itself**—for example by adding or overriding templates (ERB) in your Rails app. Those templates may use Tailwind utility classes that never appear in Maglev’s built-in editor markup, so they would be missing from the default editor CSS bundle. Listing directories with `tailwindcss_folders` tells the Tailwind watcher to scan those files and include any utilities it finds there.
+
+```ruby
+Maglev.configure do |config|
+  config.tailwindcss_folders = [
+    Rails.root.join('app/views/maglev/editor')
+  ]
+end
+```
+
+Use paths that match where your editor-facing views or partials actually live.
 
 ## Translate theme labels (categories, section/block settings)
 
@@ -126,15 +163,15 @@ The `select` setting type is particularly useful for providing content editors w
 
 ```yaml
 settings:
-- label: "Menu style"
-  id: menu_style
-  type: select
-  select_options:
-  - label: "Option 1"
-    value: "option1"
-  - label: "Option 2"
-    value: "option2"
-  default: "option1"
+  - label: "Menu style"
+    id: menu_style
+    type: select
+    select_options:
+      - label: "Option 1"
+        value: "option1"
+      - label: "Option 2"
+        value: "option2"
+    default: "option1"
 ```
 
 ### Localizing select options
@@ -143,16 +180,16 @@ For multi-language support, use the translation files with the `{setting_id}_opt
 
 ```yaml
 settings:
-- label: "Alignment"
-  id: alignment
-  type: select
-  select_options:
-  - label: "Left"
-    value: left
-  - label: "Center"
-    value: center
-  - label: "Right"
-    value: right
+  - label: "Alignment"
+    id: alignment
+    type: select
+    select_options:
+      - label: "Left"
+        value: left
+      - label: "Center"
+        value: center
+      - label: "Right"
+        value: right
 ```
 
 You can translate it like this:

@@ -5,17 +5,17 @@ order: 1
 
 # Avo
 {% description %}
-An example about how to create a blog with both Maglev and Avo.
+Step-by-step guide to build a blog with both Maglev and Avo.
 {% enddescription %}
 
 
-[Avo](https://avohq.io/) is an improved and more polished alternative of the venerable [ActiveAdmin](https://activeadmin.info/) gem. In short, you build a super clean back-office to manage the records of your application and just by running a few commands in the terminal.
+[Avo](https://avohq.io/) is a polished admin framework for Rails, often considered a modern alternative to [ActiveAdmin](https://activeadmin.info/). It helps you build a clean back-office to manage your app records with just a few terminal commands.
 
 {% hint style="info" %}
-If you don't want to go through all the steps, we set up a [Git repository](https://github.com/maglevhq/avo-weblog) for this sample application.
+If you prefer to skip the full walkthrough, use this ready-made sample repository: [maglevhq/avo-weblog](https://github.com/maglevhq/avo-weblog).
 {% endhint %}
 
-## Create a brand new Rails app
+## Create a new Rails app
 
 ```bash
 rails new weblog -j esbuild --css tailwind -d=postgresql
@@ -28,13 +28,13 @@ Add the extra gems:
 gem "image_processing", "~> 1.2"
 ```
 
-Install ActiveStorage
+Install Active Storage
 
 ```bash
 bin/rails active_storage:install
 ```
 
-Install ActionText
+Install Action Text
 
 ```
 bin/rails action_text:install
@@ -48,7 +48,7 @@ bin/rails app:template LOCATION='https://avohq.io/app-template'
 
 ## Create your first resource
 
-Create a post resource
+Generate a post resource
 
 ```bash
 bin/rails generate resource post title:string content:rich_text
@@ -58,7 +58,7 @@ bin/rails generate resource post title:string content:rich_text
 ```ruby
 class Post < ApplicationRecord
   validates :title, presence: true
-  
+
   has_rich_text :content
 
   has_one_attached :cover_photo
@@ -67,13 +67,13 @@ end
 ```
 {% endcode %}
 
-Update the database
+Migrate the database
 
 ```bash
 bin/rails db:migrate
 ```
 
-Generate the related Avo resource.
+Generate the corresponding Avo resource.
 
 ```
 rails generate avo:resource post
@@ -101,9 +101,9 @@ end
 bin/rails s
 ```
 
-Awesome, we can now create our posts! Fire your browser, hit  [http://localhost:3000/avo/resources/posts/new](http://localhost:3000/avo/resources/posts/new). Write some posts.
+You can now create posts. Open [http://localhost:3000/avo/resources/posts/new](http://localhost:3000/avo/resources/posts/new) and create a few records.
 
-## Installation of Maglev
+## Install Maglev
 
 Add the **Maglev** gem to your Gemfile:
 
@@ -113,7 +113,7 @@ gem 'maglevcms', '~> 1.1.7'
 ```
 {% endcode %}
 
-Install the files Maglev requires to work and create your site in DB.
+Install Maglev files and create the initial site record in the database.
 
 ```bash
 bundle install
@@ -121,9 +121,9 @@ bin/rails g maglev:install
 bin/rails maglev:create_site
 ```
 
-## Use our local TailwindCSS config
+## Use a local Tailwind CSS config
 
-In the layout of the Maglev theme **app/views/theme/layout.html.erb**, change this line
+In your Maglev theme layout (`app/views/theme/layout.html.erb`), replace this line:
 
 {% code title="app/views/theme/layout.html.erb" %}
 ```html
@@ -131,7 +131,7 @@ In the layout of the Maglev theme **app/views/theme/layout.html.erb**, change th
 ```
 {% endcode %}
 
-by this one:
+with:
 
 {% code title="app/views/theme/layout.html.erb" %}
 ```html
@@ -142,7 +142,7 @@ by this one:
 ```
 {% endcode %}
 
-Add the **font-poppings** class to the body tag.
+Add the **`font-poppins`** class to the `<body>` tag.
 
 {% code title="app/views/theme/layout.html.erb" %}
 ```html
@@ -152,7 +152,7 @@ Add the **font-poppings** class to the body tag.
 ```
 {% endcode %}
 
-Finally, modify your **tailwindconfig.js** file to register the new family font.
+Finally, update `tailwindconfig.js` to register the new font family.
 
 {% code title="tailwindconfig.js" %}
 ```javascript
@@ -174,13 +174,13 @@ module.exports = {
 ```
 {% endcode %}
 
-## Tweak Avo / Maglev UIs
+## Connect Avo and Maglev UIs
 
-In this chapter, we're going to improve a little bit the UX of the Avo and Maglev administration UIs by adding links between the 2 UIs.
+In this section, we improve navigation between the Avo and Maglev admin interfaces by adding links in both directions.
 
 ### Avo UI: add a link to Maglev
 
-Open the `config/initializers/avo.rb` file and look for the `config.main_menu` statement. Replace it by the following:
+Open `config/initializers/avo.rb`, find `config.main_menu`, and replace it with:
 
 {% code title="config/initializers/avo.rb" %}
 ```ruby
@@ -202,7 +202,7 @@ config.main_menu = -> {
 
 ### Maglev UI: add a link back to Avo
 
-Open the `config/initializers/maglev.rb` file and add the following lines:
+Open `config/initializers/maglev.rb` and add:
 
 {% code title="config/initializers/maglev.rb" %}
 ```ruby
@@ -211,9 +211,9 @@ config.back_action = ->(site) { redirect_to main_app.avo_path }
 ```
 {% endcode %}
 
-## Create an home page based on Maglev sections
+## Create a home page with Maglev sections
 
-First, add 2 new section categories in the `theme.yml` file
+First, add two section categories to `theme.yml`:
 
 {% code title="app/theme/theme.yml" %}
 ```yaml
@@ -251,9 +251,9 @@ bin/rails g maglev:section nav_01 \
 --settings logo:image call_to_action:link block:nav_item:link:link
 ```
 
-This section is a little bit special because we can have one single instance of it in the page and its content must be the same in all the pages of the site. Moreover, it must be located at the top of the page.
+This section is special: there should be only one instance per page, the content should be shared across all pages, and it should appear at the top.
 
-Thus, open the `app/theme/sections/nav/nav_01.yml` file and modify the definition of the nav section like the following:
+Then open `app/theme/sections/nav/nav_01.yml` and update the section definition:
 
 {% code title="app/theme/sections/nav/nav_01.yml" %}
 ```yaml
@@ -270,7 +270,7 @@ sample:
   settings:
     logo: "/theme/logo-placeholder.svg"
     call_to_action: { text: "Action", url: "#" }
-  blocks: 
+  blocks:
   - type: nav_item
     settings:
       link: { text: "Nav item", url: "#" }
@@ -279,7 +279,7 @@ sample:
 
 See how it looks: http://localhost:3000/maglev/admin/sections/nav\_01/preview\_in\_frame
 
-It doesn't look like a navbar, let's change the template of the section here at `app/views/theme/sections/nav/nav_01.html.erb` and replace it with:
+It still needs styling. Replace `app/views/theme/sections/nav/nav_01.html.erb` with:
 
 {% code title="app/views/theme/sections/nav/nav_01.html.erb" %}
 ```html
@@ -305,7 +305,7 @@ It doesn't look like a navbar, let's change the template of the section here at 
 
 **Note:** Making our navigation section responsive is not part of this guide.
 
-### Second section: hero
+### Second section: Hero
 
 ```bash
 bin/rails g maglev:section hero_01 \
@@ -331,7 +331,7 @@ It needs a little bit of styling. Open the `app/views/theme/sections/hero/hero_0
 ```
 {% endcode %}
 
-Alright, it's looking good. Let's change the sample data before we see the section in action in the editor. Change the sample data at the bottom of the `app/theme/sections/hero/hero_01.yml` file:
+Now update the sample data before opening the section in the editor. Edit the `sample` block at the bottom of `app/theme/sections/hero/hero_01.yml`:
 
 {% code title="app/theme/sections/hero/hero_01.yml" %}
 ```yaml
@@ -345,9 +345,9 @@ sample:
 
 Now, go to http://localhost:3000/maglev/admin/sections/hero\_01/preview and click on the **Take Screenshot** button.
 
-### Third section: N latests posts
+### Third section: Latest posts
 
-Generate the different files for the section
+Generate the section files:
 
 ```bash
 bin/rails g maglev:section latest_posts \
@@ -355,7 +355,7 @@ bin/rails g maglev:section latest_posts \
 --settings number_of_posts:select more_link:link
 ```
 
-Tweak the definition of the section (`app/theme/sections/blog/latest_posts.yml`):
+Update the section definition (`app/theme/sections/blog/latest_posts.yml`):
 
 {% code title="app/theme/sections/blog/latest_posts.yml" %}
 ```yml
@@ -381,14 +381,14 @@ settings:
 sample:
   settings:
     number_of_posts: "2"
-    more_link: 
+    more_link:
       text: "More posts"
       url: "#"
   blocks: []
 ```
 {% endcode %}
 
-We're going to modify the HTML template of the section. Open the `app/views/theme/sections/blog/latest_posts.html.erb` file
+Now modify the section template at `app/views/theme/sections/blog/latest_posts.html.erb`:
 
 {% code title="app/views/theme/sections/blog/latest_posts.html.erb" %}
 ```html
@@ -422,7 +422,7 @@ We're going to modify the HTML template of the section. Open the `app/views/them
 
 ### Fourth section: Highlighted post
 
-First, we've to register the **posts** collection in Maglev. Open your `config/initializers/maglev.rb` file and add the following lines:
+First, register the **posts** collection in Maglev. Open `config/initializers/maglev.rb` and add:
 
 {% code title="config/initializers/maglev.rb" %}
 ```ruby
@@ -449,13 +449,13 @@ end
 ```
 {% endcode %}
 
-**NOTE**: You might have to add the following snippet code at the top of your `config/environments/development.rb` file.
+**Note:** You may need to add this snippet near the top of `config/environments/development.rb`.
 
 ```ruby
 Rails.application.default_url_options = { host: 'localhost', port: 3000 }
 ```
 
-It's now time to generate the different files for the section.
+Now generate the section files:
 
 ```bash
 bin/rails g maglev:section highlighted_post \
@@ -463,7 +463,7 @@ bin/rails g maglev:section highlighted_post \
 --settings title post:collection_item:posts
 ```
 
-Tweak the definition of the section (`app/theme/sections/blog/latest_posts.yml`):
+Update the section definition (`app/theme/sections/blog/latest_posts.yml`):
 
 {% code title="app/theme/sections/blog/latest_posts.yml" %}
 ```
@@ -478,13 +478,13 @@ sample:
 
 Note: Replace `id: first` with the id of an existing post if you want to preview/test your section against a specific post.
 
-And lastly, replace the template of the section `app/views/theme/blog/highlighted_post.html.erb` by:
+Finally, replace `app/views/theme/blog/highlighted_post.html.erb` with:
 
 {% code title="app/views/theme/blog/highlighted_post.html.erb" %}
 ```html
 <%= maglev_section.wrapper_tag.div class: 'py-6 md:py-12 px-6 md:px-0' do %>
   <% post = maglev_section.settings.post.item %>
-  
+
   <div class="w-full md:max-w-4xl mx-auto space-y-8">
     <h2 class="uppercase font-bold text-xl">
       <%= maglev_section.setting_tag :title %>
@@ -511,9 +511,9 @@ And lastly, replace the template of the section `app/views/theme/blog/highlighte
 ```
 {% endcode %}
 
-## Template of a post
+## Post template
 
-First, we are going to update the main layout of our Rails application. But before that, we have to update the `app/controllers/application_controller.rb` file like this:
+First, update the main app controller to load site-scoped Maglev sections:
 
 {% code title="app/controllers/application_controller.rb" %}
 ```ruby
@@ -524,7 +524,7 @@ end
 ```
 {% endcode %}
 
-Then, change the `app/views/layouts/application.html.erb` with:
+Then replace `app/views/layouts/application.html.erb` with:
 
 {% code title="app/views/layouts/application.html.erb" %}
 ```html
@@ -568,7 +568,7 @@ Finally, open the `app/views/posts/show.html.erb`.
     </div>
 
     <%= image_tag main_app.url_for(@post.cover_photo), class: 'object-cover mx-auto' %>
-    
+  
     <article class="prose lg:prose-lg max-w-full">
       <%= @post.content %>
     </article>
@@ -579,10 +579,10 @@ Finally, open the `app/views/posts/show.html.erb`.
 
 ## Improvements
 
-Although we've covered a lot of topics, a couple of core features is still missing in order to achieve a fully functional blog.
+Although this guide covers many topics, a few core features are still missing for a fully production-ready blog.
 
 * add an authentication engine for both Avo and Maglev
-* create a lot more sections: footer, subscribe, call to action, forms, ...etc
+* create more sections: footer, subscribe, call-to-action, forms, etc.
 * complete the HTML/ERB template to list all the posts (+ paginate the lists)
 * RSS feeds
 * Sitemap
