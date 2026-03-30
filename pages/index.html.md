@@ -20,4 +20,4 @@ Maglev is a **Rails engine** that adds a **page builder** and **content delivery
 **Editions**
 
 - **Open source** — single site; plug into one Rails app.
-- **Saas edition** — multi-site / multi-theme for platforms, franchises, and agencies.
+- **SaaS plugin** — multi-site / multi-theme for platforms, franchises, and agencies ([Introduction](/saas-plugin/introduction)).

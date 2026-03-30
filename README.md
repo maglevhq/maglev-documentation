@@ -7,7 +7,8 @@ This repository contains the documentation site for Maglev, structured for clari
 - **pages/**: Main documentation content, organized into:
   - `guides/`: Step-by-step guides and how-tos.
   - `concepts/`: Explanations of core concepts and data structures.
-  - `pro/`: Pro features and advanced topics.
+  - `pro/`: Maglev PRO (v2) features and advanced topics.
+  - `saas-plugin/`: Maglev v3 SaaS plugin (multi-site) documentation.
   - `integrations/`: Integration guides for third-party tools.
   - `index.html.md`: Main landing page for the docs.
 

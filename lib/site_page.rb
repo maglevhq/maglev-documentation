@@ -81,24 +81,15 @@ class SitePage
   def self.find_next_page(pages, resource)
     page = find(pages, resource)
 
-    # pp "#{page.title} / parent: #{!!page.parent}, #{page.parent&.title} / next_sibling: #{page.next_sibling&.title}"
+    loop do
+      if page.next_sibling
+        sib = page.next_sibling
+        return sib unless sib.children?
+        return sib.children.first
+      end
 
-    # nominal case, check for the next sibling in the current level
-    if page.next_sibling
-      return page.next_sibling unless page.next_sibling.children?
-      # the next sibling is a folder, return the first child
-      return page.next_sibling.children.first
+      return nil if page.parent.nil?
+      page = page.parent
     end
-
-    # if there is no next sibling, check the parent's next sibling
-    return nil if page.parent.nil?
-
-    next_parent_sibling = page.parent.next_sibling
-
-    return nil if next_parent_sibling.nil?
-
-    return next_parent_sibling unless next_parent_sibling.children?
-
-    next_parent_sibling.children.first
   end
 end
