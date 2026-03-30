@@ -345,6 +345,10 @@ sample:
 
 Now, go to http://localhost:3000/maglev/admin/sections/hero\_01/preview and click on the **Take Screenshot** button.
 
+{% hint style="info" %}
+This admin preview and **Take Screenshot** flow belongs to the **Avo / theme admin** integration. **Maglev v3** does not include that UI; add JPEGs under `public/theme/<category>/<section_id>.jpg` yourself, as described in [Section thumbnail](/guides/section-thumbnail).
+{% endhint %}
+
 ### Third section: Latest posts
 
 Generate the section files:

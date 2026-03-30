@@ -58,6 +58,10 @@ A section’s id is the **base name** of its definition file (for example, `hero
 | blocks\_label             | string            | Label for the block list in the editor (for example, `"Menu items"` for a site menu section). Default: `"Blocks"`. |
 | blocks\_presentation      | string            | Possible values: `tree` or `list` (default).  `tree` is useful to build nested menus or tabs.                                                                               |
 
+### Picker thumbnail (screenshot)
+
+The editor section list can show a preview image. Maglev does **not** store that image in the YAML file: it loads a JPEG from `public/theme/<category>/<section_id>.jpg` (see [Section thumbnail](/guides/section-thumbnail)). In Maglev v3 there is no built-in admin action to generate that file; you add or replace the JPEG yourself (or use custom tooling).
+
 {% code title="heroe_01.yml" %}
 ```yaml
 name: "Heroe #1"

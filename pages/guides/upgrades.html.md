@@ -38,6 +38,9 @@ Follow these steps to upgrade an existing Maglev v2 installation to v3 beta:
 5. **Update any custom editor header**
    - If you override the editor header, move `app/views/maglev/editor/_header.html.erb` to `app/views/layouts/maglev/editor/_head.html.erb`.
 
+6. **Section picker thumbnails**
+   - The legacy theme admin **Take Screenshot** flow is not part of Maglev v3. Thumbnails are still JPEG files under `public/theme/<category>/<section_id>.jpg`; see [Section thumbnail](/guides/section-thumbnail).
+
 ## From v1 to v2
 
 Nothing to do.

@@ -69,7 +69,7 @@ When you are ready to try it in the UI, start the Rails server and open the edit
 Sample content helps in three situations:
 
 * when writing the template of the section with "real" content.
-* when generating a screenshot of the section with realistic content.
+* when capturing or designing the [section thumbnail](/guides/section-thumbnail) so the picker preview matches a realistic layout.
 * when an editor picks the section in the editor UI. She won't see a blank section.
 
 This can be achieved by declaring the **sample** attribute in the definition file of the section.
