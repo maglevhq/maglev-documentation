@@ -32,7 +32,7 @@ That is deliberate. It keeps Maglev **easy to drop into a host Rails app**, lets
 Concretely:
 
 - **Server-rendered HTML** is the source of truth for most of the editor—consistent across environments, easy to debug with standard Rails traces and templates.
-- **ViewComponent** structures editor chrome (panels, toolbars, inspectors, empty states) as testable, encapsulated pieces. In the engine, explore `app/components/maglev/editor` and shared primitives under `app/components/maglev/uikit`.
+- **ViewComponent** structures editor chrome (panels, toolbars, inspectors, empty states) as testable, encapsulated pieces. In the engine, explore `app/components/maglev/editor` and shared primitives under `app/components/maglev/uikit`. For an interactive gallery of those UI primitives, see [Maglev UIKit](https://uikit.maglev.dev/).
 - **Stimulus** adds interaction on top of that markup: toggles, menus, wiring actions to requests, and light local state—without turning the editor into a separate client-rendered app.
 - **importmap** loads editor JavaScript without a parallel frontend build pipeline, so CI/CD and upgrades stay straightforward.
 
