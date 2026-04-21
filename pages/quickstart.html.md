@@ -95,6 +95,7 @@ bundle install
 bundle exec rails g maglev:install
 bundle exec rails g maglev:hyperui:install --force
 bundle exec rails maglev:create_site
+bundle exec rails maglev:publish_site
 ```
 
 ### 5. Run the app
