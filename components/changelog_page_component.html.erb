@@ -1,0 +1,79 @@
+<div class="-mx-6 lg:-mx-8">
+  <div class="bg-white dark:bg-zinc-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-6xl px-6 md:px-12 lg:px-8">
+      <div class="mx-auto max-w-2xl lg:mx-0">
+        <h1 class="text-pretty text-4xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-5xl">Changelog</h1>
+        <p class="mt-6 text-lg/8 text-gray-600 dark:text-zinc-400">
+          Stay up to date with the latest features, improvements, and bug fixes in Maglev.
+          From new Rails support to UI enhancements, discover what's new in each release.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-gray-50 dark:bg-zinc-950 py-16 sm:py-24">
+    <div class="mx-auto max-w-6xl px-6 md:px-12 lg:px-8">
+      <div class="space-y-8">
+        <% releases.each do |release| %>
+          <%= render ChangelogReleaseComponent.new(release: release) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white dark:bg-zinc-900 py-16">
+    <div class="mx-auto max-w-6xl px-6 md:px-12 lg:px-8">
+      <div class="overflow-hidden rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-sm">
+        <div class="border-b border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800/50 px-6 py-4">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Legend</h3>
+        </div>
+        <div class="px-6 py-6">
+          <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div class="flex items-center gap-2">
+              <span class="flex h-3 w-3 rounded-full bg-green-500"></span>
+              <span class="text-sm text-gray-700 dark:text-zinc-300">New Feature</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="flex h-3 w-3 rounded-full bg-red-500"></span>
+              <span class="text-sm text-gray-700 dark:text-zinc-300">Bug Fix</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="flex h-3 w-3 rounded-full bg-yellow-500"></span>
+              <span class="text-sm text-gray-700 dark:text-zinc-300">Security</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="flex h-3 w-3 rounded-full bg-gray-500"></span>
+              <span class="text-sm text-gray-700 dark:text-zinc-300">Maintenance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="bg-white dark:bg-zinc-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-6xl px-6 md:px-12 lg:px-8">
+      <div class="relative overflow-hidden rounded-lg bg-gradient-to-r from-rose-500 to-indigo-500 py-6 lg:flex lg:items-center lg:justify-between lg:py-12 lg:p-16 md:shadow-xl">
+        <div class="absolute top-0 right-0 hidden h-96 w-full -mt-20 translate-x-1/2 rotate-45 bg-white opacity-5 sm:block"></div>
+        <div class="absolute top-0 left-0 hidden h-96 w-full -mt-20 -translate-x-1/2 rotate-45 bg-pink-300 opacity-5 sm:block"></div>
+        <div class="relative rounded-lg p-6 md:p-0 md:pb-4">
+          <h2 class="text-3xl font-extrabold leading-9 tracking-tight text-white sm:text-4xl sm:leading-10">
+            Try Maglev locally in 2 minutes!
+          </h2>
+          <p class="mt-5 w-full text-base leading-6 text-white/90 md:w-3/4">
+            <strong>Want to see how Maglev works in a Rails app?</strong>
+            <br><br>
+            Follow our quick <strong>Getting Started</strong> guide to run Maglev with just a few commands.
+            <br><br>
+            No config. No vendor lock-in. Just Rails.
+          </p>
+        </div>
+        <div class="relative flex w-full flex-col items-center space-y-5 px-6 md:flex-row md:w-auto md:space-x-5 md:space-y-0 lg:flex-shrink-0 md:px-0">
+          <a href="/quickstart" class="block w-full rounded-md bg-indigo-100 px-5 py-3 text-center text-base font-medium leading-6 text-indigo-600 transition duration-150 ease-in-out hover:bg-white focus:outline-none focus:shadow-outline md:inline-flex md:w-auto md:shadow">
+            Install it <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

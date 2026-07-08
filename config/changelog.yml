@@ -1,0 +1,327 @@
+---
+releases:
+- version: 3.0.2
+  date: July 2026
+  latest: true
+  yanked: false
+  summary:
+  changes:
+  - kind: feature
+    text: Studio section preview endpoint for local development
+  - kind: feature
+    text: WebP support for section screenshots
+  - kind: fix
+    text: Firefox error from duplicate importmaps in theme layouts (`maglev_javascript_importmap_tags`)
+  - kind: fix
+    text: Crash when reordering sections with site-scoped section IDs
+  - kind: fix
+    text: Editor errors not reaching error trackers (Honeybadger, Sentry)
+  - kind: fix
+    text: Truncation of long page titles/paths in the editor top bar
+  - kind: fix
+    text: Image gallery search dropping picker params
+  - kind: fix
+    text: Section add preview delayed by debounce
+  - kind: chore
+    text: Dependency updates and security pins (erb, net-imap)
+- version: 3.0.1
+  date: April 22, 2026
+  latest: false
+  yanked: false
+  summary: Bug fix release for the v3 editor.
+  changes:
+  - kind: fix
+    text: Section picker opens in a modal when inserting sections before or after an existing section
+  - kind: fix
+    text: Correct translation key for the section breadcrumb back link
+  - kind: fix
+    text: Asset delete in the media library uses a Turbo-friendly URL
+  - kind: chore
+    text: Rails application template scaffolds Maglev v3
+- version: 3.0.0
+  date: April 2026
+  latest: false
+  yanked: false
+  summary: 'Maglev 3.0 is a major release. The editor is rebuilt on Hotwire (Turbo
+    + Stimulus), ViewComponent, Tailwind CSS 4, and importmap-rails — with no Node.js,
+    npm, Yarn, or Vite in the shipping path. That means leaner production images,
+    fewer CI steps, and faster deploys without a separate front-end build. The editor
+    is ordinary Rails: views, components, and Ruby hooks you can extend the same way
+    as the rest of your application.'
+  changes:
+  - kind: feature
+    text: 'Editor stack: Hotwire, ViewComponent, Tailwind CSS 4, and importmap-rails
+      — same class of UX as before, without Vue in production'
+  - kind: feature
+    text: Rails 7.2 and 8.x tested and supported
+  - kind: chore
+    text: Ruby 3.2+ compatibility improvements (gem still requires Ruby >= 3.0)
+  - kind: feature
+    text: MariaDB / MySQL support alongside Postgres and SQLite
+  - kind: feature
+    text: Stronger Propshaft-style setups; editor Tailwind can include content paths
+      from the host app so host classes compile correctly
+  - kind: feature
+    text: UIKit preview with Lookbook (uikit.maglev.dev)
+  - kind: chore
+    text: Removed the legacy REST API and old admin web routes tied to the previous
+      editor approach
+  - kind: chore
+    text: Dropped Vite / vite-rails, Kaminari, JBuilder, and Node-based editor assets
+      for the new direction
+  - kind: chore
+    text: No separate Maglev admin section — editing flows live in the new editor
+  - kind: feature
+    text: Revamped add-section flow; UI polish (pages list, navigation, publish notifications,
+      locale switcher hidden for a single locale, draft/live preview links)
+  - kind: feature
+    text: Paginated pages list with path column; configurable per_page for assets
+      pagination
+  - kind: feature
+    text: Sidebar, top bar, and view consistency pass
+  - kind: feature
+    text: 'Draft vs published: publish, discard draft, revert changes, publish page
+      metadata (title + SEO), CLI to publish all pages for a site (with guards when
+      no site exists)'
+  - kind: feature
+    text: Publishing status indicators; CreatePageService improvements for paths across
+      locales; fixes for duplicate sections on new pages and published pages with
+      no sections
+  - kind: feature
+    text: Global event when a page is updated (for host-app hooks)
+  - kind: feature
+    text: Engine routes split into smaller chunks
+  - kind: feature
+    text: External JS namespaced under maglev/; editor client JS scoped to the iframe
+      as intended
+- version: 2.1.0
+  date: November 2, 2025
+  latest: false
+  yanked: false
+  summary:
+  changes:
+  - kind: feature
+    text: "MariaDB/MySQL database support \U0001F42C"
+  - kind: feature
+    text: Use i18n to translate the option labels of a select type setting
+  - kind: fix
+    text: Allow to fully localize a select setting type
+  - kind: feature
+    text: Allow to translate the label of the blocks tab pane / block types in the
+      dropdown
+  - kind: fix
+    text: Make sure the locale is always a string to remove warnings from the JSON
+      gem (+ prevent potential weird issues)
+  - kind: feature
+    text: New reset section CLI command to remove sections in the DB
+  - kind: feature
+    text: Add a task to copy the built assets from the Maglev engine to the main app
+  - kind: feature
+    text: Use the Rails asset host to generate the URL of the static section screenshots
+  - kind: chore
+    text: Update template.rb to use image_processing '~> 1.3'
+- version: 2.0.0
+  date: July 7, 2025
+  latest: false
+  yanked: false
+  summary:
+  changes:
+  - kind: feature
+    text: "Brand new logo design \U0001F485"
+  - kind: feature
+    text: Completely revamped list item components with better icons and labels
+  - kind: feature
+    text: Enhanced section management - insert sections before/after any existing
+      section
+  - kind: feature
+    text: Improved current page actions displayed under a clean dropdown interface
+  - kind: feature
+    text: Smart section labels displayed in the content sections list
+  - kind: feature
+    text: Major UI/UX improvements throughout the Editor interface
+  - kind: feature
+    text: New Rails commands to rename and remove section types
+  - kind: feature
+    text: FontAwesome and Remixicon icon library generators
+  - kind: feature
+    text: Upload functionality for section screenshots
+  - kind: feature
+    text: Enhanced active? method for link settings
+  - kind: feature
+    text: Better handling for pages with many entries
+  - kind: feature
+    text: SQLite3 database support
+  - kind: feature
+    text: Cache control headers for improved asset performance
+  - kind: feature
+    text: Enhanced precompile assets task
+  - kind: chore
+    text: Dropped Rails 6 support - now requires Rails 7+
+  - kind: fix
+    text: getSectionLabel now properly handles undefined values
+  - kind: fix
+    text: Improved page path validation - no spaces allowed
+  - kind: fix
+    text: Proper I18n.locale handling when rendering Maglev pages
+  - kind: fix
+    text: Exception handling for duplicate section IDs across categories
+  - kind: fix
+    text: Better fallback to index page for empty path parameters
+  - kind: fix
+    text: WebSocket requests no longer processed by Maglev
+  - kind: fix
+    text: Collection items with 'any' ID now load correctly
+  - kind: fix
+    text: Dropdown menus work properly in modal dialogs
+  - kind: fix
+    text: RTE toolbar no longer hides dropdown menus
+  - kind: fix
+    text: Eliminated flickering when opening image modals
+  - kind: fix
+    text: Loosened default setting attribute requirements
+  - kind: feature
+    text: Improved translations for theme items, sections, and categories
+  - kind: fix
+    text: Enhanced i18n translation handling throughout the interface
+- version: 1.8.0
+  date: December 16, 2024
+  latest: false
+  yanked: false
+  summary:
+  changes:
+  - kind: chore
+    text: Support Rails 8
+  - kind: chore
+    text: Support NodeJS 23
+  - kind: feature
+    text: Make the logs less verbose if something wrong happens
+  - kind: feature
+    text: Add the superscript command in the RTE input
+- version: 1.7.3
+  date: September 17, 2024
+  latest: false
+  yanked: false
+  summary: Bug fixes and maintenance release.
+  changes: []
+- version: 1.7.2
+  date: August 30, 2024
+  latest: false
+  yanked: false
+  summary:
+  changes:
+  - kind: fix
+    text: Handle the case when a setting of a section or a block doesn't exist anymore
+  - kind: fix
+    text: vite-plugin-ruby@^5.0.0 might not be compatible with vite_ruby-3.8.2
+- version: 1.7.1
+  date: August 30, 2024
+  latest: false
+  yanked: false
+  summary: Bug fixes and maintenance release.
+  changes: []
+- version: 1.7.0
+  date: August 29, 2024
+  latest: false
+  yanked: true
+  summary:
+  changes:
+  - kind: chore
+    text: Support for Rails 7.2
+  - kind: chore
+    text: Upgrade to Yarn 4
+  - kind: feature
+    text: New ES translations for the editor UI
+  - kind: fix
+    text: Wrong CSS margin regarding the new/edit page forms
+  - kind: security
+    text: Upgrade gems and JS packages
+- version: 1.6.1
+  date: July 02, 2024
+  latest: false
+  yanked: false
+  summary:
+  changes:
+  - kind: feature
+    text: Allow wildcards in the reserved paths config
+  - kind: feature
+    text: The config class can now be changed in Maglev PRO
+  - kind: fix
+    text: Add support for LinkedInBot (og tags)
+- version: 1.6.0
+  date: March 29, 2024
+  latest: false
+  yanked: false
+  summary:
+  changes:
+  - kind: feature
+    text: Display a nice error message in the editor if an exception occurs when rendering
+      a section
+  - kind: feature
+    text: By default, add the section type in the dom data (`data-maglev-section-type`)
+  - kind: fix
+    text: Reduce the number of calls to the fetch_site service
+  - kind: fix
+    text: Defer the loading of the Maglev client javascript to avoid conflicts if
+      importmaps is used
+  - kind: fix
+    text: Use the default image of a image setting when adding a block
+  - kind: chore
+    text: Upgrade to the latest version of Tailwindcss
+  - kind: security
+    text: Upgrade gems and JS packages
+- version: 1.5.1
+  date: January 07, 2024
+  latest: false
+  yanked: false
+  summary:
+  changes:
+  - kind: fix
+    text: The editor css file was not correctly generated because postcss.config.cjs
+      was missing in the gem
+- version: 1.5.0
+  date: January 07, 2024
+  latest: false
+  yanked: true
+  summary:
+  changes:
+  - kind: feature
+    text: Support Rails application with UUID primary keys
+  - kind: chore
+    text: Upgrade to Vite5
+  - kind: fix
+    text: The `maglev:change_site_locales` rake task was broken
+- version: 1.4.0
+  date: November 10, 2023
+  latest: false
+  yanked: false
+  summary:
+  changes:
+  - kind: feature
+    text: Support for both Rails 6, 7 and 7.1
+  - kind: feature
+    text: Add the pt-BR translations for admin UI
+  - kind: fix
+    text: Taking a screenshot of a section was broken
+- version: 1.2.3
+  date: "~September 2023"
+  latest: false
+  yanked: false
+  summary:
+  changes:
+  - kind: fix
+    text: Allow the Twitter/Facebook/Google bots to crawl the Maglev pages
+  - kind: fix
+    text: Can clear the og:image input
+  - kind: fix
+    text: Rack static header rules
+  - kind: fix
+    text: Don't render a non visible page (unless we're in the editor)
+  - kind: feature
+    text: Add 2 new setting types (hint + divider) to improve the readability of the
+      UX/UI
+  - kind: feature
+    text: Setting UI names can now be translated
+  - kind: feature
+    text: The GetPageFullpath service is now easier to extend
+  - kind: feature
+    text: The checkbox type setting content supports "true", "1", "false", "0" values

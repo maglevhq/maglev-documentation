@@ -13,4 +13,8 @@ class AppLayoutComponent < ViewComponent::Base
   def pages
     @pages ||= SitePage.build_from_root(site.root)
   end
+
+  def full_width?
+    current_page.data['full_width'] == true
+  end
 end

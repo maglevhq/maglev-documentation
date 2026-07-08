@@ -1,0 +1,50 @@
+<div class="overflow-hidden rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-sm">
+  <div class="<%= header_classes %> px-6 py-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold ring-1 ring-inset <%= version_badge_classes %>">
+          <%= version %>
+        </span>
+        <% if latest? %>
+          <span class="inline-flex items-center rounded-full bg-indigo-100 dark:bg-indigo-900/50 px-2.5 py-0.5 text-xs font-medium text-indigo-700 dark:text-indigo-300 ring-1 ring-inset ring-indigo-600/20">
+            Latest
+          </span>
+        <% end %>
+        <% if yanked? %>
+          <span class="inline-flex items-center rounded-full bg-yellow-100 dark:bg-yellow-900/50 px-2.5 py-0.5 text-xs font-medium text-yellow-700 dark:text-yellow-300 ring-1 ring-inset ring-yellow-600/20">
+            Yanked
+          </span>
+        <% end %>
+      </div>
+      <time class="text-sm <%= date_classes %>" datetime="<%= date %>">
+        <%= date %>
+      </time>
+    </div>
+  </div>
+
+  <div class="px-6 py-6">
+    <% if summary.present? %>
+      <p class="text-base text-gray-600 dark:text-zinc-400">
+        <%= summary %>
+      </p>
+    <% end %>
+
+    <% if changes.any? %>
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 <%= 'mt-6' if summary.present? %>">
+        What's Changed
+      </h3>
+      <ul class="space-y-3">
+        <% changes.each do |change| %>
+          <% kind = change_kind(change) %>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 flex h-2 w-2 flex-shrink-0 rounded-full <%= kind[:dot] %>"></span>
+            <span class="text-sm text-gray-700 dark:text-zinc-300">
+              <strong><%= kind[:label] %>:</strong>
+              <%= formatted_change_text(change['text']) %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

@@ -23,4 +23,4 @@ Typical use cases:
 - **Agencies** — spin up microsites or campaign landings without a separate CMS product.
 - **SaaS products** — offer a site builder as part of your platform, on your infrastructure.
 
-If you are still on **Maglev v2** with the **Maglev PRO** gem, see [Pro](https://v2.docs.maglev.dev/pro/introduction) for that edition; new multi-site work on v3 belongs with the SaaS plugin and the guides below.
+**Upgrading from Maglev PRO?** See [Migrate from Maglev PRO](/saas-plugin/migrate-from-pro). The v2 PRO docs remain on [v2.docs.maglev.dev](https://v2.docs.maglev.dev/pro/introduction).

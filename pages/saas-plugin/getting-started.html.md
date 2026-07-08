@@ -22,10 +22,14 @@ source "https://<your-credentials>@packages.nocoffee.fr/private" do
   gem "maglevcms-saas-plugin", "~> 0.1.0"
 end
 
-gem "maglevcms", "~> 3.0.0", require: false
+gem "maglevcms", "~> 3.0.0"
 ```
 
 {% endcode %}
+
+{% hint style="warning" %}
+Do **not** add `require: false` to `maglevcms` when using the SaaS plugin—the engine must load normally. See [Migrate from Maglev PRO](/saas-plugin/migrate-from-pro) if you are upgrading from PRO.
+{% endhint %}
 
 Then install:
 
