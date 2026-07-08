@@ -21,6 +21,16 @@ Maglev serves **published** content to visitors. After upgrading or bulk edits, 
 
 The editor loads Stimulus and importmap-driven JS from the engine. Check the browser console for 404s on script tags, and verify you did not block Maglev routes or CSP rules for inline or module scripts on editor paths.
 
+## Firefox: `maglev-client` bare specifier error
+
+If the browser console shows:
+
+> Uncaught TypeError: The specifier "maglev-client" was a bare specifier, but was not remapped to anything.
+
+and your theme layout uses **importmap-rails** (`javascript_importmap_tags`), you likely have **two** `<script type="importmap">` tags — one from the theme and one from `maglev_client_javascript_tags`. Firefox allows only one importmap per document and silently ignores the rest.
+
+Replace both helpers with the combined **`maglev_javascript_importmap_tags`** helper in `app/views/theme/layout.html.erb`. See [Use importmap-rails in a theme](/guides/use-importmap-rails-in-a-theme) for usage and background.
+
 ## Theme layout or `render_maglev_sections` errors
 
 Ensure `app/views/theme/layout.html.erb` still calls `render_maglev_sections` with the expected locals (`site`, `theme`, `page`, `page_sections`, etc.) as in a fresh install. A missing `<main data-maglev-dropzone>` (or equivalent) can break drop targeting in the UI.
