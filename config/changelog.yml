@@ -1,8 +1,20 @@
 ---
 releases:
+- version: 3.0.3
+  date: August 2, 2026
+  latest: true
+  yanked: false
+  summary: Bug fix release for the v3 editor.
+  changes:
+  - kind: fix
+    text: Stale `lock_version` errors from overlapping editor autosaves
+  - kind: fix
+    text: ResizeObserver loop warning in the editor preview
+  - kind: fix
+    text: Checkbox settings not staying unchecked after update
 - version: 3.0.2
   date: July 2026
-  latest: true
+  latest: false
   yanked: false
   summary:
   changes:
