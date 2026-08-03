@@ -22,7 +22,7 @@ source "https://<your-credentials>@packages.nocoffee.fr/private" do
   gem "maglevcms-saas-plugin", "~> 0.1.0"
 end
 
-gem "maglevcms", "~> 3.0.3"
+gem "maglevcms", "~> 3.1.0"
 ```
 
 {% endcode %}

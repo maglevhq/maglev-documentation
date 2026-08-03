@@ -75,7 +75,7 @@ Add Maglev and the HyperUI kit to your **Gemfile**, then install:
 {% code title="Gemfile" %}
 
 ```ruby
-gem 'maglevcms', '~> 3.0.3'
+gem 'maglevcms', '~> 3.1.0'
 gem 'maglevcms-hyperui-kit', '~> 2.0.0'
 ```
 

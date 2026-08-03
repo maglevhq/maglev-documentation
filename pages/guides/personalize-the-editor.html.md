@@ -61,6 +61,10 @@ By modifying the values within this file, you will be able to achieve something 
 
 ![the Maglev Editor UI with a different logo, tab title and primary color.](pages/personalize-the-editor-2.jpg)
 
+{% hint style="info" %}
+From 3.1.0, the editor chrome lays out right-to-left when `ui_locale` is Arabic (`ar`), Hebrew (`he`), Persian (`fa`), or Urdu (`ur`).
+{% endhint %}
+
 ## Pagination
 
 You can tune how the editor loads long lists by setting `pagination` in `config/initializers/maglev.rb`. Pass a hash with any of the following keys:

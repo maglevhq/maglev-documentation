@@ -14,10 +14,10 @@ Maglev v3 drops the Node.js toolchain thanks to Hotwire, Stimulus, and Rails imp
 Follow these steps to upgrade an existing Maglev v2 installation to v3 beta:
 
 1. **Update dependencies**
-   - Update the `maglevcms` entry in your application's `Gemfile` by pointing to the **3.0.3** version.
+   - Update the `maglevcms` entry in your application's `Gemfile` by pointing to the **3.1.0** version.
 
      ```ruby
-     gem "maglevcms", "~> 3.0.3"
+     gem "maglevcms", "~> 3.1.0"
      ```
 
    - Run `bundle install` to install the new version.
